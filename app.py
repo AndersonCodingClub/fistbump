@@ -12,9 +12,10 @@ def home():
 
 @app.route('/wall')
 def wall():
-    # placeholder for database logic
-    paths = get_file_names_by_time('static/images')
-    
+    d = Database()
+    rows = d.get_images()
+    paths = [row[2] for row in rows]
+        
     return render_template('wallfeed.html', paths=paths)
 
 @app.route('/camera')
@@ -24,11 +25,15 @@ def camera():
 
 @app.route('/capture', methods=['POST'])
 def capture():
+    d = Database()
+    
     data_url = request.json['dataURL']
     data = data_url.split(',')[1]
     decoded_data = base64.b64decode(data.encode('utf-8'))
-    save_image_file(decoded_data)
-        
+    
+    saved_path = save_image_file(decoded_data)
+    d.add_image(1, saved_path)
+    
     return 'Image captured and saved'
 
 if __name__ == '__main__':

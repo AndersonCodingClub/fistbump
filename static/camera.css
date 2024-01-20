@@ -1,5 +1,11 @@
-#title {
-    size: "30px";
-    color: red;
+body {
+    background-color: rgb(227, 227, 227);
 }
 
+#title {
+    font-family: "interstate", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    size: 30px;
+    color: rgb(51, 39, 60);
+}

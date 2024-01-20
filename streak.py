@@ -18,6 +18,11 @@ print("The current date and time is", current_date_and_time)
 print("The current date and time is", current_time)
 
 class Streak:
+    capture_last_picture_date()
+    capture_last_streak()
+
+
+
     time_now = datetime.now()
     current_time = time_now.strftime("%H:%M:%S")
     new_streak_time = time(23, 59, 59)
@@ -25,7 +30,8 @@ class Streak:
     current_date = date.today()
     last_streak_date = None
     last_picture_date = None
-  
+    new_date = current_date
+    current_picture_date = None
     
     current_date_and_time = datetime.now()
 
@@ -53,9 +59,8 @@ class Streak:
             last_picture_date = date.today()
             return last_picture_date
     def capture_last_picture_date():
-        if last_picture_date == None:
-            last_picture_date == current_date
-        else: 
+        last_picture_date = current_picture_date
+        current_picture_date = date.today()
    
     def add_streak():
         if current_streak == 0

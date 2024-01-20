@@ -13,6 +13,8 @@ def save_image_file(img_data: bytes) -> str:
     
     if len(image_file_names) > 0:
         number_suffix = int(image_file_names[-1].split('_')[-1].split('.')[0]) + 1
-
-    with open(f'static/images/image_{number_suffix}.png', 'wb') as f:
+    saved_path = f'static/images/image_{number_suffix}.png'
+    with open(saved_path, 'wb') as f:
         f.write(img_data)
+        
+    return saved_path
