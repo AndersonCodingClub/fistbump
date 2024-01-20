@@ -5,17 +5,19 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Fistbump | Camera</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='camera.css') }}">
     </head>
     <body>
-        <h1>CAMERA</h1>
+        <h1 id="title">Let's Fistbump!</h1>
 
         <video id="video" width="640" height="480" autoplay></video>
-        <button id="captureButton" onclick="takePhoto()">Capture</button>
-        <button id="saveButton" onclick="saveImage()">save</button>
+        <button class="button" id="captureButton" onclick="takePhoto()">Capture</button>
+        <button class="button" id="saveButton" onclick="saveImage()">Save Image</button>
+        <button class="button" id="discardButton" onclick="discardImage()">Discard Image</button>
         <canvas id="canvas" width="640" height="480"></canvas>
     
         <script src="static/camera.js"></script>
 
-        <h1>STREAK: {{streak}}</h1>
+        <h1 id="streak">Fistbump Streak: {{streak}}</h1>
     </body>
 </html>

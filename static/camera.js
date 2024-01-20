@@ -3,6 +3,7 @@ const canvas = document.getElementById('canvas');
 const captureButton = document.getElementById('captureButton');
 let stream;
 let image;
+let imageSavable = false;
 
 // Access the user's camera
 navigator.mediaDevices.getUserMedia({ video: true })
@@ -22,14 +23,22 @@ function takePhoto() {
     // Draw the current frame on the canvas
     canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
     image = canvas.toDataURL();
+    imageSavable = true;
 }
 
 function saveImage() {
-    fetch('/capture', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ "dataURL": image })
-    });
+    if (imageSavable) {
+        fetch('/capture', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ "dataURL": image })
+        });
+    }
+}
+
+function discardImage() {
+    canvas.getContext('2d').clearRect(0, 0, canvas. width, canvas. height);
+    imageSavable = false;
 }
