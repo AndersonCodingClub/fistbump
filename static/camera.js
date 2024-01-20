@@ -2,6 +2,7 @@ const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const captureButton = document.getElementById('captureButton');
 let stream;
+let image;
 
 // Access the user's camera
 navigator.mediaDevices.getUserMedia({ video: true })
@@ -14,13 +15,20 @@ navigator.mediaDevices.getUserMedia({ video: true })
     });
 
 video.style.transform = "scaleX(-1)";
+canvas.style.transform = "scaleX(-1)";
 
 // Capture button click event
-captureButton.addEventListener('click', () => {
+function takePhoto() {
     // Draw the current frame on the canvas
     canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-    
-    // Stop the camera stream
-    stream.getTracks().forEach(track => track.stop());
-});
+    image = canvas.toDataURL();
+}
 
+function saveImage() {
+    fetch('/capture', {
+        method: 'POST',
+        body: JSON.stringify({"dataURL": image, "time": Date.now()})
+    });
+}
+
+console.log();

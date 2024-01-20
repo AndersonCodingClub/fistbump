@@ -57,3 +57,12 @@ class Database:
         
         self._close_connection()
         return image_id
+    
+    def get_images(self):
+        self._setup_connection()
+        
+        self.cursor.execute('SELECT * FROM images')
+        rows = self.cursor.fetchall()
+        
+        self._close_connection()
+        return rows

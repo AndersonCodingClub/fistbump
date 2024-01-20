@@ -10,10 +10,12 @@
         <h1>CAMERA</h1>
 
         <video id="video" width="640" height="480" autoplay></video>
-        <button id="captureButton">Capture</button>
+        <button id="captureButton" onclick="takePhoto()">Capture</button>
+        <button id="saveButton" onclick="saveImage()">save</button>
         <canvas id="canvas" width="640" height="480"></canvas>
     
-
         <script src="static/camera.js"></script>
+
+        <h1>STREAK: {{streak}}</h1>
     </body>
 </html>
