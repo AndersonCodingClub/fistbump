@@ -27,8 +27,9 @@ function takePhoto() {
 function saveImage() {
     fetch('/capture', {
         method: 'POST',
-        body: JSON.stringify({"dataURL": image, "time": Date.now()})
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "dataURL": image })
     });
 }
-
-console.log();

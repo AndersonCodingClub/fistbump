@@ -1,7 +1,14 @@
 from datetime import datetime
 from datetime import date
 from datetime import time
+import time
 current_date_and_time = datetime.now()
+
+
+
+
+
+
 
 print("The current date and time is", current_date_and_time)
 
@@ -13,6 +20,7 @@ print("The current date and time is", current_time)
 class Streak:
     time_now = datetime.now()
     current_time = time_now.strftime("%H:%M:%S")
+    new_streak_time = time(23, 59, 59)
     last_streak_date_and_time = capture_last_streak()
     today = date.today()
     last_streak_date = None
@@ -33,8 +41,10 @@ class Streak:
         else:
             return True
     def add_streak():
-        if check_streak() == True and current_time == 23:59:59:
+        if (check_streak() == True) and (current_time == new_streak_time):
             current_streak += 1
+        if check_streak() == False and current_time == new_streak_time:
+            current_streak == 1
             return current_streak
 
 
