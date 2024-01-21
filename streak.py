@@ -1,36 +1,23 @@
-from datetime import datetime
 from datetime import date
-from datetime import time
-import time 
-
 
 
 class Streak:
-   
-
-    current_picture_date = None
     last_picture_date = None
     current_streak = 0
-
-
-    def capture_last_picture_date():
-        if current_picture_date == None:
-            current_picture_date = date.today()
+    
+    def add_streak():
+        current_date = date.today()
+        Streak.check_streak()
+        
+        if Streak.last_picture_date is not None:
+            if current_date != Streak.last_picture_date and current_date - Streak.last_picture_date == 1:
+                Streak.current_streak += 1
+                Streak.last_picture_date = current_date
         else:
-            last_picture_date = current_picture_date
-            current_picture_date = date.today()
-        return last_picture_date
-   
-    def add_streak(last_picture_date, current_picture_date):
-        if current_streak == 0 or last_picture_date == None:
-            current_streak += 1
-        elif last_picture_date != None and < current_picture_date and (current_picture_date - last_picture_date) == 1:
-            current_streak += 1
-    def remove_streak(last_picture_date, current_picture_date):
-        if current_picture_date - last_picture_date >= 2:
-            current_streak = 0
+            Streak.current_streak += 1
+            Streak.last_picture_date = current_date
     
-    
-    
-    capture_last_picture_date()
-    capture_last_streak()
+    @staticmethod
+    def check_streak():
+        if date.today() - Streak.last_picture_date >= 2:
+            Streak.current_streak = 0
