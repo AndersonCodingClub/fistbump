@@ -67,8 +67,8 @@ class Database:
         self._close_connection()
         return rows
     
-    def drop_all_tables(self):
+    def _drop_image_table(self):
         self._setup_connection()
-        self.cursor.execute('DROP TABLE users, images')
+        self.cursor.execute('DROP TABLE images')
         self.conn.commit()
         self._close_connection()

@@ -1,6 +1,7 @@
 import base64
+from streak import Streak
 from database import Database
-from save import save_image_file, get_file_names_by_time
+from save import save_image_file
 from flask import Flask, render_template, redirect, request, session
 
 
@@ -8,6 +9,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
+    Streak.check_streak()
     return render_template('index.html')
 
 @app.route('/wall')
@@ -20,7 +22,7 @@ def wall():
 
 @app.route('/camera')
 def camera():
-    current_streak = 5 #Streak.current_streak
+    current_streak = Streak.current_streak
     return render_template('camera.html', streak=current_streak)
 
 @app.route('/capture', methods=['POST'])
@@ -33,6 +35,7 @@ def capture():
     
     saved_path = save_image_file(decoded_data)
     d.add_image(1, saved_path)
+    Streak.add_streak()
     
     return 'Image captured and saved'
 
