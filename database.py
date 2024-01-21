@@ -14,6 +14,8 @@ class Database:
             CREATE TABLE IF NOT EXISTS users (
                 user_id INT AUTO_INCREMENT PRIMARY KEY,
                 name VARCHAR(255) NOT NULL,
+                username VARCHAR(255) NOT NULL,
+                password VARCHAR(255) NOT NULL,
                 major VARCHAR(255) NOT NULL,
                 year INT NOT NULL
             )
@@ -69,6 +71,6 @@ class Database:
     
     def _drop_image_table(self):
         self._setup_connection()
-        self.cursor.execute('DROP TABLE images')
+        self.cursor.execute('DROP TABLE users, images')
         self.conn.commit()
         self._close_connection()

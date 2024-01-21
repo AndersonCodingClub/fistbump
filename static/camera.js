@@ -1,6 +1,7 @@
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const captureButton = document.getElementById('captureButton');
+const imageElement = document.getElementById('picture');
 let stream;
 let image;
 let imageSavable = false;

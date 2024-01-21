@@ -36,5 +36,11 @@ def capture():
     
     return 'Successful Upload'
 
+@app.route('/profile')
+def profile():
+    if 'user_id' not in session:
+        return 'Login'
+    return ''
+
 if __name__ == '__main__':
     app.run(port=3000, debug=True)

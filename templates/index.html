@@ -12,19 +12,16 @@
     <body>
         <div id="nav-bar">
             <button onclick="window.location.href = '/camera'" class="fistbump-button opacity-hover">Take Fistbump</button>
-            <div id="profile-icon-container">
-                <i class="fa-solid fa-user fa-xl opacity-hover"></i>
+            <div onclick="window.location.href = '/profile'" id="profile-icon-container">
+                <i class="fa-solid fa-user fa-xl"></i>
             </div>
+            <img src="{{ url_for('static', filename='media/fire.png') }}" class="streak-fire">
+            <div id="streak"> {{streak}} </div>
         </div>
-        <div id="center">
-            <div id="tile-container">
-                {% for path in paths %}
-                    <img src="{{ path }}" class="gallery-image">
-                {% endfor %}
-            </div>
+        <div id="tile-container">
+            {% for path in paths %}
+                <img src="{{ path }}" class="gallery-image">
+            {% endfor %}
         </div>
-        <div id="nav-bar">
-            <img src="">
-
     </body>
 </html>

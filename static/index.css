@@ -34,7 +34,8 @@ body {
 }
 
 #profile-icon-container {
-    margin-left: 62.5%;
+    margin-left: 55%;
+    margin-right: 2.5%;
     border-radius: 100%;
     color: rgb(51, 39, 60);
     background-color: rgb(188, 180, 247);
@@ -42,13 +43,10 @@ body {
 }
 
 #profile-icon-container:hover {
+    transition: all .5s ease-in-out;
+    cursor: pointer;
+    color: rgb(51, 39, 60, 0.75);
     background-color: rgba(188, 180, 247, 0.75);
-}
-
-#center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 #tile-container {
@@ -89,5 +87,14 @@ body {
     border: none;
     font-size: 18px;
     font-weight: 900;
-    margin-right: 6vw;
+}
+
+.streak-fire {
+    width: 50px;
+}
+
+#streak {
+    width: 170px;
+    height 50px;
+    text-align: center;
 }
