@@ -1,5 +1,7 @@
 body {
+    position: relative;
     background-color: rgb(227, 227, 227);
+    text-align: center;
 }
 
 #title {
@@ -10,17 +12,44 @@ body {
     color: rgb(51, 39, 60);
 }
 
-
 #canvas {
+    position: absolute;
     transform: scaleX(-1);
-
+    left: 27.5%;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 
 #video {
+    position: absolute;
     transform: scaleX(-1);
+    left: 27.5%;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 
-
 .button { 
-    
+    margin-top: 500px;
+    color: rgb(51, 39, 60);
+    background-color: rgb(188, 180, 247);
+    width: 192.5px;
+    height: 60px;
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+    font-weight: 900;
+    margin-right: 20px;
+}
+
+#discardButton {
+    background-color: rgb(200, 160, 227);
+}
+
+#saveButton {
+    background-color: rgb(200, 160, 227);
+}
+
+.button:hover {
+    cursor: pointer;
 }
