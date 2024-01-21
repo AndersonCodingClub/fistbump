@@ -66,7 +66,7 @@ class Database:
         self._close_connection()
         if row:
             password_hash = hashlib.sha256(password.encode()).hexdigest()
-            if password_hash == row[2]:
+            if password_hash == row[3]:
                 return row[0]
         
     def add_image(self, user_id: int, path: str) -> int:

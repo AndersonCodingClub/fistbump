@@ -1,11 +1,17 @@
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const captureButton = document.getElementById('captureButton');
+const discardButton = document.getElementById('discardButton');
+const saveButton = document.getElementById('saveButton');
 const imageElement = document.getElementById('picture');
 let stream;
 let image;
 let imageSavable = false;
-// captureButton.style.backgroundColor = "rgb(168, 210, 247)";
+
+discardButton.style.backgroundColor = "rgb(204, 204, 204)";
+discardButton.style.cursor = "default";
+saveButton.style.backgroundColor = "rgb(204, 204, 204)";
+saveButton.style.cursor = "default";
 
 // Access the user's camera
 navigator.mediaDevices.getUserMedia({ video: true })
@@ -27,8 +33,10 @@ function takePhoto() {
     canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
     image = canvas.toDataURL();
     imageSavable = true;
-
-
+    discardButton.style.backgroundColor = "rgb(229, 156, 154)";
+    discardButton.style.cursor = "pointer";
+    saveButton.style.backgroundColor = "rgb(188, 180, 247)";
+    saveButton.style.cursor = "pointer";
 }
 
 function saveImage() {
@@ -40,12 +48,16 @@ function saveImage() {
             },
             body: JSON.stringify({ "dataURL": image })
         });
-    }
+        saveButton.style.backgroundColor = "rgb(180, 247, 209)";
 
-    setTimeout(() => {window.location.href = '/'}, 1000);
+        setTimeout(() => {window.location.href = '/'}, 1000);
+    }
 }
 
 function discardImage() {
     canvas.getContext('2d').clearRect(0, 0, canvas. width, canvas. height);
     imageSavable = false;
+
+    discardButton.style.backgroundColor = "rgb(204, 204, 204)";
+    saveButton.style.backgroundColor = "rgb(204, 204, 204)";
 }

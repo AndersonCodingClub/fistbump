@@ -1,12 +1,16 @@
+import os
 import base64
 from streak import Streak
 from database import Database
+from dotenv import load_dotenv
 from save import save_image_file
 from flask import Flask, render_template, redirect, request, session
 
 
+load_dotenv('config.env')
+
 app = Flask(__name__)
-app.secret_key = 'secret key'
+app.secret_key = os.environ['FLASK_SECRET_KEY']
 
 @app.route('/')
 def home():
@@ -20,6 +24,8 @@ def home():
 
 @app.route('/camera')
 def camera():
+    if not session.get('user_id'):
+        return redirect('/auth/login')
     current_streak = Streak.current_streak
     return render_template('camera.html', streak=current_streak)
 
@@ -45,10 +51,11 @@ def auth_login():
         if user_id is not None:
             session['user_id'] = user_id
             
-            if request.referrer.endswith('signup'):
+            formatted_referrer = '/'+request.referrer.split('/')[-1]
+            if formatted_referrer != '/signup':
                 return redirect('/')
             else:
-                return redirect(request.referrer)
+                return redirect(formatted_referrer)
         else:
             return render_template('login.html', bad_attempt=True)
     else:
@@ -68,20 +75,26 @@ def auth_signup():
             user_id = Database().add_user(name, username, password, major, year)
             session['user_id'] = user_id
             
-            if request.referrer.endswith('login'):
+            formatted_referrer = '/'+request.referrer.split('/')[-1]
+            if formatted_referrer != '/login':
                 return redirect('/')
             else:
-                return redirect(request.referrer)
+                return redirect(formatted_referrer)
         else:
             return render_template('signup.html', bad_attempt=True)
     else:
         return render_template('signup.html')
+    
+@app.route('/logout')
+def logout():
+    session['user_id'] = None
+    return redirect('/')
 
 @app.route('/profile')
 def profile():
-    if 'user_id' not in session:
+    if not session.get('user_id'):
         return redirect('/auth/login')
-    return 'Profile'
-
+    return render_template('profile.html')
+        
 if __name__ == '__main__':
     app.run(port=3000, debug=True)
