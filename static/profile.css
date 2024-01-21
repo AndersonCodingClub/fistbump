@@ -135,6 +135,7 @@ nav a {
     font-size: 2.5em;
     padding: 30px;
     color: rgb(51, 39, 60);
+    position: relative;
 }
 
 nav a:hover {
@@ -236,16 +237,30 @@ h1 {
     font-family: "interstate", sans-serif;
     display: flex;
     flex-direction: row;
-    align-items: right;
-    justify-content: right;
+    align-items: center;
+    justify-content: center;
     opacity: 0;
     transition: opacity 0.25s;
-    font-size: 10px;
+    font-size: 12px;
     
+}
+
+.setting-icon-overlay > * {
+    pointer-events: none;
+    tab-index = "-1";
+    transition: transform 0.5s;
+    transform: translateX(60px);
+
+   
 }
 
 .setting-icon-overlay:hover {
     opacity: 1;
+}
+
+.setting-icon-overlay:hover > * {
+    transform: translateX(90px);
+    transition: transform 0.3s;
 }
 
 .setting-icon-description {

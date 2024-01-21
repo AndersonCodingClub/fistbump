@@ -63,6 +63,42 @@ body {
     background-color: rgba(188, 180, 247, 0.75);
 }
 
+#center {
+    display: flex;
+    justify-content: center;
+}
+
+#wall-type-toggle {
+    display: flex;
+    flex-direction: row;
+    column-gap: 5px;
+    font-weight: 600;
+    font-size: 18px;
+    margin-top: 25px;
+}
+
+.wall-toggle-button {
+    padding: 10px;
+    border: none;
+}
+
+.wall-toggle-button.active {
+    border-bottom-style: solid;
+    border-bottom-color: rgb(0, 0, 139);
+    background-color: rgb(173, 216, 230);
+    border-bottom-width: 2px;
+}
+
+.wall-toggle-button:hover {
+    cursor: pointer;
+    background-color: rgba(173, 216, 230, 0.4);
+}
+
+.wall-toggle-button.active:hover {
+    background-color: rgb(173, 216, 230);
+    border-bottom-color: rgb(0, 0, 139);
+}
+
 #tile-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, 200px);

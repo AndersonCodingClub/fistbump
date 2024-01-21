@@ -20,10 +20,21 @@ def home():
         session['current_streak'] = Streak(session['user_id']).get_streak(session['current_streak'], increment=False)
 
     db = Database()
+
+    feed_type = request.args.get('feed-type', 'global')
+    if feed_type == 'fyp' and not session.get('user_id'):
+        return redirect('/auth/login')
+    elif feed_type == 'fyp':
+        following = db.get_followers(session['user_id'])
+    
     rows = list(reversed(db.get_images()))
     image_dicts = []
     for row in rows:
         _, creator_user_id, match_user_id, img_path, img_date_published = row
+        if feed_type == 'fyp':
+            if creator_user_id not in following:
+                continue
+        
         img_creator_name = Database().get_user_row(creator_user_id)[1]
         img_match_name = Database().get_user_row(match_user_id)[1]
         formatted_date_published = str(img_date_published)
@@ -31,7 +42,7 @@ def home():
         image_dicts.append({'creator_user_id':creator_user_id, 'creator_name':img_creator_name, 'match_user_id':match_user_id,
                             'match_name':img_match_name, 'img_path':img_path, 'formatted_date_published':formatted_date_published})
     
-    return render_template('index.html', paths=image_dicts, streak=session['current_streak'])
+    return render_template('index.html', paths=image_dicts, streak=session['current_streak'], feed_type=feed_type)
 
 @app.route('/camera')
 def camera():

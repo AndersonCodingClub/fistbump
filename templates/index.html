@@ -23,6 +23,12 @@
                 <p class="streak-number">{{ streak }}</p>
             </div>
         </div>
+        <div id="center">
+            <div id="wall-type-toggle">
+                <div id="global-toggle" class="wall-toggle-button" title="everyone's posts" onclick="switchFeed('global')">Global Feed</div>
+                <div id="fyp-toggle" class="wall-toggle-button" title="only the people you follow" onclick="switchFeed('fyp')">For You</div>
+            </div>
+        </div>
         <div id="tile-container">
             {% for path_dict in paths %}
                 <img src="{{ path_dict.img_path }}" data-creator="{{ path_dict.creator_name }}" data-match="{{ path_dict.match_name }}"
@@ -31,6 +37,10 @@
                 class="gallery-image">
             {% endfor %}
         </div>
+        <script>
+            var feedType = '{{ feed_type }}'
+        </script>
+        <script src="{{ url_for('static', filename='index.js') }}"></script>
         <script src="{{ url_for('static', filename='view_post.js') }}"></script>
     </body>
 </html>
