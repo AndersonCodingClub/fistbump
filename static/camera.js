@@ -51,7 +51,7 @@ function saveImage() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "dataURL": image })
+            body: JSON.stringify({ "dataURL": image, "matchID":match_id })
         });
         saveButton.style.backgroundColor = "rgb(180, 247, 209)";
 

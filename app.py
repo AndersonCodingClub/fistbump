@@ -23,11 +23,13 @@ def home():
     rows = list(reversed(d.get_images()))
     image_dicts = []
     for row in rows:
-        _, creator_user_id, img_path, img_date_published = row
+        _, creator_user_id, match_user_id, img_path, img_date_published = row
         img_creator_name = Database().get_user_row(creator_user_id)[1]
+        img_match_name = Database().get_user_row(match_user_id)[1]
         formatted_date_published = str(img_date_published)
         
-        image_dicts.append({'creator_name':img_creator_name, 'img_path':img_path, 'formatted_date_published':formatted_date_published})
+        image_dicts.append({'creator_name':img_creator_name, 'match_name':img_match_name, 'img_path':img_path, 
+                            'formatted_date_published':formatted_date_published})
     
     return render_template('index.html', paths=image_dicts, streak=session['current_streak'])
 
@@ -37,21 +39,23 @@ def camera():
         return redirect('/auth/login')
     
     db = Database()
-    matched_user_name = db.get_user_row(db.get_random_user())[1]
+    matched_user_id = db.get_random_user()
+    matched_user_name = db.get_user_row(matched_user_id)[1]
     
     session['current_streak'] = Streak(session['user_id']).get_streak(session['current_streak'], increment=False)
-    return render_template('camera.html', streak=session['current_streak'], match_name=matched_user_name)
+    return render_template('camera.html', streak=session['current_streak'], match_id=matched_user_id, match_name=matched_user_name)
 
 @app.route('/capture', methods=['POST'])
 def capture():
     d = Database()
     
     data_url = request.json['dataURL']
+    fistbump_match_id = request.json['matchID']
     data = data_url.split(',')[1]
     decoded_data = base64.b64decode(data.encode('utf-8'))
     
     saved_path = save_image_file(decoded_data)
-    d.add_image(session['user_id'], saved_path)
+    d.add_image(session['user_id'], saved_path, fistbump_match_id)
     
     session['current_streak'] = Streak(session['user_id']).get_streak(session['current_streak'], increment=True)
     
@@ -111,7 +115,7 @@ def profile():
     
     d = Database()
     rows = list(reversed(d.get_images(session['user_id'])))
-    paths = [row[2] for row in rows]
+    paths = [row[3] for row in rows]
     
     return render_template('profile.html', paths=paths)
 

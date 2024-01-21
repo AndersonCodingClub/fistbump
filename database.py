@@ -26,7 +26,8 @@ class Database:
         self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS images (
                 image_id INT AUTO_INCREMENT PRIMARY KEY,
-                user_id INT,
+                user_id INT NOT NULL,
+                match_user_id INT NOT NULL,
                 path VARCHAR(255) NOT NULL,
                 date_published DATETIME NOT NULL
             )
@@ -81,11 +82,11 @@ class Database:
         return rd.choice(user_ids)
     
     # Image methods
-    def add_image(self, user_id: int, path: str) -> int:
+    def add_image(self, user_id: int, path: str, match_user_id: int) -> int:
         self._setup_connection()
         
-        insert_query = 'INSERT INTO images (user_id, path, date_published) VALUES (%s, %s, CURRENT_TIMESTAMP)'
-        row = (user_id, path)
+        insert_query = 'INSERT INTO images (user_id, match_user_id, path, date_published) VALUES (%s, %s, %s, CURRENT_TIMESTAMP)'
+        row = (user_id, match_user_id, path)
         self.cursor.execute(insert_query, row)
         self.conn.commit()
         image_id = self.cursor.lastrowid

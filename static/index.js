@@ -7,7 +7,7 @@ function bindGalleryImages() {
     expandedContainer.className = 'expanded-image-container';
     document.body.appendChild(expandedContainer);
 
-    document.querySelectorAll('.gallery-image').forEach(img => {
+    document.querySelectorAll('.gallery-image').forEach(img => { 
         img.id = 'image-' + decodeURIComponent(img.src.split('_').pop().split('.')[0]);
 
         img.addEventListener('click', () => {
@@ -16,7 +16,11 @@ function bindGalleryImages() {
 
             const creatorName = document.createElement('p');
             creatorName.className = 'creator-name';
-            creatorName.textContent = img.getAttribute('data-creator');
+
+            const creatorNameSpan = `<span style="font-weight: 600;">${img.getAttribute('data-creator')}</span>`;
+            const matchNameSpan = `<span style="font-weight: 600;">${img.getAttribute('data-match')}</span>`;
+
+            creatorName.innerHTML = creatorNameSpan + ' <span style="font-weight: 300;">&</span> ' + matchNameSpan;
             expandedContainer.appendChild(creatorName);
 
             const datePublished = document.createElement('p');
@@ -32,6 +36,8 @@ function bindGalleryImages() {
             expandedImg.className = 'expanded-image';
             expandedImg.style.maxWidth = img.naturalWidth + 'px';
             expandedImg.style.maxHeight = img.naturalHeight + 'px';
+            expandedImg.style.borderRadius = '25px';
+
             imageWrapper.appendChild(expandedImg);
         });
     });

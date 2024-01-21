@@ -150,10 +150,8 @@ body {
 
 .creator-name, .date-published {
     color: white;
-    font-weight: bold;
     text-align: center;
     margin-top: 20px;
-    width: 100%;
 }
 
 .creator-name {
