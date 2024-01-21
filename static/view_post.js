@@ -17,10 +17,10 @@ function bindGalleryImages() {
             const creatorName = document.createElement('p');
             creatorName.className = 'creator-name';
 
-            const creatorNameSpan = `<span style="font-weight: 600;">${img.getAttribute('data-creator')}</span>`;
-            const matchNameSpan = `<span style="font-weight: 600;">${img.getAttribute('data-match')}</span>`;
+            const creatorNameTag = `<a href="/user/${img.getAttribute('data-creator-id')}" style="font-weight: 600;" class="underline-hover">${img.getAttribute('data-creator')}</a>`;
+            const matchNameTag = `<a href="/user/${img.getAttribute('data-match-id')}" style="font-weight: 600;" class="underline-hover">${img.getAttribute('data-match')}</a>`;
 
-            creatorName.innerHTML = creatorNameSpan + ' <span style="font-weight: 300;">&</span> ' + matchNameSpan;
+            creatorName.innerHTML = creatorNameTag + ' <span style="font-weight: 300;">&</span> ' + matchNameTag;
             expandedContainer.appendChild(creatorName);
 
             const datePublished = document.createElement('p');

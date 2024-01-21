@@ -37,10 +37,14 @@
 
             <div class="rightbox">
                 <div class="profile tabShow">
-                    {% for path in paths %}
-                        <img src="{{ path }}">
-                    {% endfor %}
-
+                    <div id="tile-container">
+                        {% for path_dict in paths %}
+                            <img src="{{ path_dict.img_path }}" data-creator="{{ path_dict.creator_name }}" data-match="{{ path_dict.match_name }}"
+                            data-creator-id="{{ path_dict.creator_user_id }}" data-match-id="{{ path_dict.match_user_id }}" 
+                            data-date-created="{{ path_dict.formatted_date_published }}" 
+                            class="gallery-image">
+                        {% endfor %}
+                    </div>
                 </div>
                 <div class="notifications tabShow">
                     <h1> Test tab 2</h1>
@@ -56,12 +60,11 @@
                 </div>
         </div>
 
-        <script src="jquery/jquery.js"></script>
         <script>
             const tab8tn =
-            document.querySelectorAll(".tab");
+                document.querySelectorAll(".tab");
             const tab =
-            document.querySelectorAll(".tabShow");
+                document.querySelectorAll(".tabShow");
 
             function tabs(panelIndex) {
                 tab.forEach(function(node) {
@@ -72,12 +75,16 @@
             }
             tabs(0);
         </script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
         <script>
             $(".tab").click(function() {
-                $(this).addClass("active").siblings().removeClass("active")
+                $(this).addClass("active").siblings().removeClass("active");
             })
+
         </script>
 
-
+        <script src="{{ url_for('static', filename='view_post.js') }}"></script>
     </body>
 </html>

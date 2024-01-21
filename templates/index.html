@@ -25,11 +25,12 @@
         </div>
         <div id="tile-container">
             {% for path_dict in paths %}
-                <img src="{{ path_dict.img_path }}" data-creator="{{ path_dict.creator_name }}" 
-                data-match="{{ path_dict.match_name }}" data-date-created="{{ path_dict.formatted_date_published }}" 
+                <img src="{{ path_dict.img_path }}" data-creator="{{ path_dict.creator_name }}" data-match="{{ path_dict.match_name }}"
+                data-creator-id="{{ path_dict.creator_user_id }}" data-match-id="{{ path_dict.match_user_id }}" 
+                data-date-created="{{ path_dict.formatted_date_published }}" 
                 class="gallery-image">
             {% endfor %}
         </div>
-        <script src="{{ url_for('static', filename='index.js') }}"></script>
+        <script src="{{ url_for('static', filename='view_post.js') }}"></script>
     </body>
 </html>
