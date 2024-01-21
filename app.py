@@ -39,14 +39,13 @@ def camera():
         return redirect('/auth/login')
     
     db = Database()
-    matched_user_id = db.get_random_user()
+    matched_user_id = db.get_random_user(session['user_id'])
     matched_user_name = db.get_user_row(matched_user_id)[1]
     
     session['current_streak'] = Streak(session['user_id']).get_streak(session['current_streak'], increment=False)
     return render_template('camera.html', streak=session['current_streak'], match_id=matched_user_id, match_name=matched_user_name)
 
 @app.route('/leaderboard')
-
 def leaderboard():
     return render_template('leaderboard.html')
 
