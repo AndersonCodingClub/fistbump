@@ -16,6 +16,7 @@ navigator.mediaDevices.getUserMedia({ video: true })
         console.error('Error accessing camera:', error);
     });
 
+
 video.style.transform = "scaleX(-1)";
 canvas.style.transform = "scaleX(-1)";
 

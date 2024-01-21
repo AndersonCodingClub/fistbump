@@ -15,7 +15,7 @@ def home():
     rows = list(reversed(d.get_images()))
     paths = [row[2] for row in rows]
     
-    return render_template('index.html', paths=paths)
+    return render_template('index.html', paths=paths, streak=Streak.current_streak)
 
 @app.route('/camera')
 def camera():
@@ -36,11 +36,29 @@ def capture():
     
     return 'Successful Upload'
 
+@app.route('/auth/login', methods=['GET', 'POST'])
+def auth_login():
+    if request.method == 'POST':
+        username, password = request.form['username'], request.form['password']        
+        user_id = Database().validate_user(username, password)
+        if user_id is not None:
+            session['is_logged_in'] = True
+            session['user_id'] = user_id
+            return redirect('/portal')
+        else:
+            return render_template('login.html', bad_attempt=True)
+    else:
+        return render_template('login.html')
+
+@app.route('/auth/signup', methods=['GET', 'POST'])
+def auth_signup():
+    return render_template('signup.html')
+
 @app.route('/profile')
 def profile():
     if 'user_id' not in session:
-        return 'Login'
-    return ''
+        return redirect('/auth/login')
+    return 'Profile'
 
 if __name__ == '__main__':
     app.run(port=3000, debug=True)

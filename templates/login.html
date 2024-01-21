@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Fistbump | Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+        <link rel="stylesheet" href="https://use.typekit.net/clh7vah.css">
+    </head>
+    <body style="background-image: url('{{ url_for('static', filename='media/pastel_gradient.png') }}'); background-size: cover;">
+        <div id="center-container">
+            <div id="login-bounding-box">
+                <div id="left">
+                    <div id="logo-container" onclick="window.location.href='/'">
+                        <p class="logo-type">Firstbump</p>
+                    </div>
+                    <div id="welcome-container">
+                        <p class="large-text">Welcome Back!</p>
+                        <p class="caption-text">Please sign in using your username and password</p>
+                    </div>
+                </div>
+                <div id="right">
+                    <p class="large-text sign-in-text">Sign In</p>
+                    <form id="auth-form" action="/auth/login" method="POST">
+                        <input class="input" type="text" name="username" required autofocus placeholder="Username" autocomplete="off">
+                        <input class="input" type="password" name="password" id="password" required placeholder="Password" autocomplete="off">
+                        <div id="show-password">
+                            <input type="checkbox" id="show-password">
+                            <label for="show-password" class="label-text">Show Password</label>
+                        </div>
+                        <input class="submit" type="submit">
+                    </form>
+                    {% if bad_attempt %}
+                    <div id="incorrect-attempt">
+                        <div id="red-stripe"></div>
+                        <div id="incorrect-attempt-message">
+                            <p>Incorrect username or password</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <script>
+            document.getElementById('show-password').addEventListener('click', function (e) {
+                var passwordInput = document.getElementById('password');
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                } else {
+                    passwordInput.type = 'password';
+                }
+            });
+        </script>        
+    </body>
+</html>

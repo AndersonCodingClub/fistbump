@@ -15,8 +15,10 @@
             <div onclick="window.location.href = '/profile'" id="profile-icon-container">
                 <i class="fa-solid fa-user fa-xl"></i>
             </div>
-            <img src="{{ url_for('static', filename='media/fire.png') }}" class="streak-fire">
-            <div id="streak"> {{streak}} </div>
+            <div id="streak-container">
+                <img src="{{ url_for('static', filename='media/fire.png') }}" class="streak-fire">
+                <p class="streak-number">{{ streak }}</p>
+            </div>
         </div>
         <div id="tile-container">
             {% for path in paths %}

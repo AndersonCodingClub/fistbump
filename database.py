@@ -1,4 +1,5 @@
 import os
+import hashlib
 import mysql.connector
 
 
@@ -47,6 +48,25 @@ class Database:
         
         self._close_connection()
         return user_id
+    
+    def validate_user(self, username: str, password: str) -> int:
+        """Validate whether entered user credentials match database entry
+
+        Args:
+            username (str): Entered username
+            password (str): Entered password
+
+        Returns:
+            int: User ID of user if valid login. If not, returns None.
+        """
+        self._setup_connection()
+        self.cursor.execute('SELECT * FROM users WHERE username=%s', (username,))
+        row = self.cursor.fetchone()
+        self._close_connection()
+        if row:
+            password_hash = hashlib.sha256(password.encode()).hexdigest()
+            if password_hash == row[2]:
+                return row[0]
         
     def add_image(self, user_id: int, path: str) -> int:
         self._setup_connection()
@@ -69,7 +89,7 @@ class Database:
         self._close_connection()
         return rows
     
-    def _drop_image_table(self):
+    def drop_all_tables(self):
         self._setup_connection()
         self.cursor.execute('DROP TABLE users, images')
         self.conn.commit()

@@ -43,11 +43,12 @@ body {
 }
 
 #discardButton {
-    background-color: rgb(200, 160, 227);
+    background-color: rgb(225, 180, 208);
+    background-color: rgb(229, 156, 144);
 }
 
-#saveButton {
-    background-color: rgb(200, 160, 227);
+#captureButton {
+    background-color: rgb(168, 210, 247);
 }
 
 .button:hover {
