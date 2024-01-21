@@ -24,9 +24,11 @@
             </div>
         </div>
         <div id="tile-container">
-            {% for path in paths %}
-                <img src="{{ path }}" class="gallery-image">
+            {% for path_dict in paths %}
+                <img src="{{ path_dict.img_path }}" data-creator="{{ path_dict.creator_name }}" 
+                data-date-created="{{ path_dict.formatted_date_published }}" class="gallery-image">
             {% endfor %}
         </div>
+        <script src="{{ url_for('static', filename='index.js') }}"></script>
     </body>
 </html>

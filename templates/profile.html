@@ -6,11 +6,65 @@
         <title>Fistbump | Profile</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
+        <script src="https://kit.fontawesome.com/b612a3a6e6.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <div id ="nav-bar">
             <button onclick="window.location.href = '/'" class="back-button opacity-hover:hover">Back</button>
             <button onclick="window.location.href = '/logout'" class="log-out-button opacity-hover:hover">Log Out</button>
         </div>
+
+        <div class="left-tab-container">
+            <div class="leftbox">
+                <nav>
+                    <a onclick-"tabs(0)" class="tab">
+                        <i class="fa fa-user"> </i>
+                    </a>
+                    <a onclick-"tabs(1)" class="tab">
+                        <i class="fa fa-bell"> </i>
+                    </a>
+                    <a onclick-"tabs(2)" class="tab">
+                        <i class="fa fa-card-o"> </i>
+                    </a>
+                    <a onclick-"tabs(3)" class="tab">
+                        <i class="fa fa-sun-o"> </i>
+                    </a>
+                    <a onclick-"tabs(4)" class="tab">
+                        <i class="fa fa-info-circle"> </i>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="rightbox">
+                <div class="profile tabShow">
+                    <h1> Test tab 1</h1>
+                </div>
+                <div class="notifications tabShow">
+                    <h1> Test tab 2</h1>
+                </div>
+                <div class="settings tabShow">
+                    <h1> Test tab 3</h1>
+                </div>
+                <div class="info tabShow">
+                    <h1> Test tab 4</h1>
+                </div>
+        </div>
+
+        <script src="jquery/jquery.js"></script>
+        <script>
+            const tab8tn =
+            document.querySelectorAll(".tab");
+            const tab =
+            document.querySelectorAll(".tabShow");
+
+            function tabs(panelIndex) {
+                tab.forEach(function(node) {
+                    node.style.display = "none";
+                });
+                tab[panelIndex].style.display =
+                "block";
+            }
+
+
     </body>
 </html>

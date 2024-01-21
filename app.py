@@ -21,9 +21,15 @@ def home():
 
     d = Database()
     rows = list(reversed(d.get_images()))
-    paths = [row[2] for row in rows]
+    image_dicts = []
+    for row in rows:
+        _, creator_user_id, img_path, img_date_published = row
+        img_creator_name = Database().get_user_row(creator_user_id)[1]
+        formatted_date_published = str(img_date_published)
+        
+        image_dicts.append({'creator_name':img_creator_name, 'img_path':img_path, 'formatted_date_published':formatted_date_published})
     
-    return render_template('index.html', paths=paths, streak=session['current_streak'])
+    return render_template('index.html', paths=image_dicts, streak=session['current_streak'])
 
 @app.route('/camera')
 def camera():
@@ -102,7 +108,12 @@ def logout():
 def profile():
     if not session.get('user_id'):
         return redirect('/auth/login')
-    return render_template('profile.html')
+    
+    d = Database()
+    rows = list(reversed(d.get_images(session['user_id'])))
+    paths = [row[2] for row in rows]
+    
+    return render_template('profile.html', paths=paths)
 
 if __name__ == '__main__':
     app.run(port=3000, debug=True)

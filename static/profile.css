@@ -72,3 +72,68 @@ body {
     opacity: 0.75;
     cursor: pointer;
 }
+
+.left-tab-container {
+    width: 400px;
+    height: 600px;
+    margin: 0 auto;
+    position: relative;
+    margin-top: 50%;    
+}
+
+
+.leftbox {
+    float: left;
+    top: -30%;
+    left: -30%;
+    position: absolute;
+    width: 10%;
+    height: 110%;
+}
+
+.rightbox {
+    display: none;
+    display: block;
+    transition: all .3s ease-in-out;
+
+}
+
+nav a {
+    list-style: none;
+    display: block;
+    transition: all .3s ease-in-out;
+}
+
+nav a:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    color: yellow;
+}
+
+nav a:first-child {
+    margin-top: 7px;
+}
+nav a.active {
+    color: yellow;
+}
+
+.rightbox {
+    width: 60%;
+    margin-left: 27%; 
+}
+
+.tabShow {
+    transition: all .5s ease-in;
+    width: 80%;
+}
+
+h1 {
+    font-family: "interstate", sans-serif;
+    font-size: 1.2rem;
+    margin-top: 40px;
+    margin-bottom: 35px;
+}
+
+.tabShow {
+    display: none;
+}
