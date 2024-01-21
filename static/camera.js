@@ -5,6 +5,7 @@ const imageElement = document.getElementById('picture');
 let stream;
 let image;
 let imageSavable = false;
+// captureButton.style.backgroundColor = "rgb(168, 210, 247)";
 
 // Access the user's camera
 navigator.mediaDevices.getUserMedia({ video: true })
@@ -26,6 +27,8 @@ function takePhoto() {
     canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
     image = canvas.toDataURL();
     imageSavable = true;
+
+
 }
 
 function saveImage() {

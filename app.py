@@ -6,6 +6,7 @@ from flask import Flask, render_template, redirect, request, session
 
 
 app = Flask(__name__)
+app.secret_key = 'secret key'
 
 @app.route('/')
 def home():
@@ -42,9 +43,12 @@ def auth_login():
         username, password = request.form['username'], request.form['password']        
         user_id = Database().validate_user(username, password)
         if user_id is not None:
-            session['is_logged_in'] = True
             session['user_id'] = user_id
-            return redirect('/portal')
+            
+            if request.referrer.endswith('signup'):
+                return redirect('/')
+            else:
+                return redirect(request.referrer)
         else:
             return render_template('login.html', bad_attempt=True)
     else:
@@ -52,7 +56,26 @@ def auth_login():
 
 @app.route('/auth/signup', methods=['GET', 'POST'])
 def auth_signup():
-    return render_template('signup.html')
+    if request.method == 'POST':
+        name = request.form['name']
+        username = request.form['username']
+        password = request.form['password']
+        major, year = request.form.get('major'), request.form.get('year')
+        if year:
+            year = int(year)
+        
+        if not Database().validate_user(username, password):
+            user_id = Database().add_user(name, username, password, major, year)
+            session['user_id'] = user_id
+            
+            if request.referrer.endswith('login'):
+                return redirect('/')
+            else:
+                return redirect(request.referrer)
+        else:
+            return render_template('signup.html', bad_attempt=True)
+    else:
+        return render_template('signup.html')
 
 @app.route('/profile')
 def profile():

@@ -76,6 +76,20 @@ html, body {
     color: rgb(228, 228, 228);
 }
 
+#mode-toggle-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 25%;
+}
+
+.toggle-link {
+    color: rgb(225, 180, 208);
+}
+
+.toggle-link:hover {
+    opacity: 0.75;
+}
+
 .sign-in-text {
     margin-top: 20%;
     margin-left: 15%;

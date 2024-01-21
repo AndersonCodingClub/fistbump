@@ -17,8 +17,8 @@ class Database:
                 name VARCHAR(255) NOT NULL,
                 username VARCHAR(255) NOT NULL,
                 password VARCHAR(255) NOT NULL,
-                major VARCHAR(255) NOT NULL,
-                year INT NOT NULL
+                major VARCHAR(255),
+                year INT
             )
         ''')
         
@@ -37,11 +37,12 @@ class Database:
         self.cursor.close()
         self.conn.close()
         
-    def add_user(self, name: str, major: str, year: int) -> int:
+    def add_user(self, name: str, username: str, password: str, major: str, year: int) -> int:
         self._setup_connection()
         
-        insert_query = 'INSERT INTO users (name, major, year) VALUES (%s, %s, %s)'
-        row = (name, major, year)
+        insert_query = 'INSERT INTO users (name, username, password, major, year) VALUES (%s, %s, %s, %s, %s)'
+        password_hash = hashlib.sha256(password.encode()).hexdigest()
+        row = (name, username, password_hash, major, year)
         self.cursor.execute(insert_query, row)
         self.conn.commit()
         user_id = self.cursor.lastrowid

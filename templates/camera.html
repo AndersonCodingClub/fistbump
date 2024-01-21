@@ -10,15 +10,17 @@
     </head>
     <body>
         <h1 id="title">Let's Fistbump!</h1>
-        <video id="video" width="640" height="480" autoplay></video>
-        <canvas id="canvas" width="640" height="480"></canvas>
-
         <button class="button" id="captureButton" onclick="takePhoto()">Capture</button>
         <button class="button" id="saveButton" onclick="saveImage()">Save</button>
         <button class="button" id="discardButton" onclick="discardImage()">Discard</button>
+
+        <video class="photo" id="video" width="640" height="480" autoplay></video>
+        <canvas class="photo" id="canvas" width="640" height="480"></canvas>
+
+        
     
         <script src="static/camera.js"></script>
 
-        <h1 id="streak">Fistbump Streak: {{streak}}</h1>
+        <h1 id="streak">Fistbump Streak: {{streak}} </h1>
     </body>
 </html>

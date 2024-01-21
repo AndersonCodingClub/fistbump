@@ -16,46 +16,35 @@
                         <p class="logo-type">Firstbump</p>
                     </div>
                     <div id="welcome-container">
-                        <p class="large-text">Welcome Back!</p>
-                        <p class="caption-text">Please sign in using your username and password</p>
+                        <p class="large-text">Welcome In!</p>
+                        <p class="caption-text">Enter some basic information about yourself to get started!</p>
                     </div>
                     <div id="mode-toggle-container">
                         <p class="caption-text">
-                            Don't have an account? <a href="/auth/signup" class="toggle-link">Sign Up</a>
+                            Already have an account? <a href="/auth/login" class="toggle-link">Login</a>
                         </p>
                     </div>
                 </div>
                 <div id="right">
-                    <p class="large-text sign-in-text">Sign In</p>
-                    <form id="auth-form" action="/auth/login" method="POST">
+                    <p class="large-text sign-in-text">Sign Up</p>
+                    <form id="auth-form" action="/auth/signup" method="POST">
+                        <input class="input" type="text" name="name" required autofocus placeholder="Full name" autocomplete="off">
                         <input class="input" type="text" name="username" required autofocus placeholder="Username" autocomplete="off">
                         <input class="input" type="password" name="password" id="password" required placeholder="Password" autocomplete="off">
-                        <div id="show-password">
-                            <input type="checkbox" id="show-password">
-                            <label for="show-password" class="label-text">Show Password</label>
-                        </div>
+                        <input class="input" type="text" name="major" placeholder="Major (not required)" autocomplete="off">
+                        <input class="input" type="text" name="year" placeholder="Year of graduation (not required)" autocomplete="off">
                         <input class="submit" type="submit">
                     </form>
                     {% if bad_attempt %}
                     <div id="incorrect-attempt">
                         <div id="red-stripe"></div>
                         <div id="incorrect-attempt-message">
-                            <p>Incorrect username or password</p>
+                            <p>Username already taken</p>
                         </div>
                     </div>
                     {% endif %}
                 </div>
             </div>
-        </div>
-        <script>
-            document.getElementById('show-password').addEventListener('click', function (e) {
-                var passwordInput = document.getElementById('password');
-                if (passwordInput.type === 'password') {
-                    passwordInput.type = 'text';
-                } else {
-                    passwordInput.type = 'password';
-                }
-            });
-        </script>        
+        </div>      
     </body>
 </html>
