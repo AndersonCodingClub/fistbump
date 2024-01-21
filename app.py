@@ -19,8 +19,8 @@ def home():
     else:
         session['current_streak'] = Streak(session['user_id']).get_streak(session['current_streak'], increment=False)
 
-    d = Database()
-    rows = list(reversed(d.get_images()))
+    db = Database()
+    rows = list(reversed(db.get_images()))
     image_dicts = []
     for row in rows:
         _, creator_user_id, match_user_id, img_path, img_date_published = row
@@ -51,7 +51,7 @@ def leaderboard():
 
 @app.route('/capture', methods=['POST'])
 def capture():
-    d = Database()
+    db = Database()
     
     data_url = request.json['dataURL']
     fistbump_match_id = request.json['matchID']
@@ -59,11 +59,11 @@ def capture():
     decoded_data = base64.b64decode(data.encode('utf-8'))
     
     saved_path = save_image_file(decoded_data)
-    d.add_image(session['user_id'], saved_path, fistbump_match_id)
+    db.add_image(session['user_id'], saved_path, fistbump_match_id)
     
     session['current_streak'] = Streak(session['user_id']).get_streak(session['current_streak'], increment=True)
     
-    return 'Successful Upload'
+    return {'success':True}
 
 @app.route('/auth/login', methods=['GET', 'POST'])
 def auth_login():
@@ -117,8 +117,8 @@ def profile():
     if not session.get('user_id'):
         return redirect('/auth/login')
     
-    d = Database()
-    rows = list(reversed(d.get_images(session['user_id'])))
+    db = Database()
+    rows = list(reversed(db.get_images(session['user_id'])))
     image_dicts = []
     for row in rows:
         _, creator_user_id, match_user_id, img_path, img_date_published = row
@@ -133,16 +133,22 @@ def profile():
 
 @app.route('/user/<user_id>')
 def user_page(user_id):
+    if not session.get('user_id'):
+        return redirect('/auth/login')
+    
     if not session.get('current_streak') or not session.get('user_id'):
         session['current_streak'] = 0
     else:
         session['current_streak'] = Streak(session['user_id']).get_streak(session['current_streak'], increment=False)
     
-    user_row = Database().get_user_row(user_id)
-    _, name, username, _, major, year = user_row
+    db = Database()
     
-    d = Database()
-    rows = list(reversed(d.get_images(user_id)))
+    user_row = db.get_user_row(user_id)
+    _, name, username, _, major, year = user_row
+    followers = db.get_followers(user_id)
+    following = db.get_following(user_id)
+    
+    rows = list(reversed(db.get_images(user_id)))
     image_dicts = []
     for row in rows:
         _, creator_user_id, match_user_id, img_path, img_date_published = row
@@ -154,7 +160,26 @@ def user_page(user_id):
                             'match_name':img_match_name, 'img_path':'/'+img_path, 'formatted_date_published':formatted_date_published})
     
     return render_template('user.html', name=name, username=username, major=major, year=year, paths=image_dicts,
-                           streak=session['current_streak'])
+                           streak=session['current_streak'], followers=followers, following=following, user_id=int(user_id),
+                           viewer_user_id=session['user_id'], is_following=session['user_id'] in followers)
+    
+@app.route('/follow', methods=['POST'])
+def follow():
+    db = Database()
+    follower_id = request.json['followerID']
+    following_id = request.json['followingID']
+    db.add_follower(follower_id, following_id)
+    
+    return {'success':True}
+    
+@app.route('/unfollow', methods=['POST'])
+def unfollow():
+    db = Database()
+    follower_id = request.json['followerID']
+    following_id = request.json['followingID']
+    db.remove_follower(follower_id, following_id)
+    
+    return {'success':True}
 
 if __name__ == '__main__':
     app.run(port=3000, debug=True)

@@ -236,11 +236,12 @@ h1 {
     font-family: "interstate", sans-serif;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    align-items: right;
+    justify-content: right;
     opacity: 0;
     transition: opacity 0.25s;
     font-size: 10px;
+    
 }
 
 .setting-icon-overlay:hover {
@@ -248,5 +249,6 @@ h1 {
 }
 
 .setting-icon-description {
-    font-size: 1.35em;
+    font-size: 1em;
+
 }

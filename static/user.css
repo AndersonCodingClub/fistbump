@@ -133,6 +133,11 @@ body {
     transition: all .5s ease-in-out;
 }
 
+.unfollow-button {
+    background-color: rgb(204, 204, 204) !important;
+    width: 85px !important;
+}
+
 #follow-button:hover {
     opacity: 0.75;
     cursor: pointer;
