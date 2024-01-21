@@ -1,5 +1,6 @@
 import os
 import hashlib
+import random as rd
 import mysql.connector
 
 
@@ -52,15 +53,6 @@ class Database:
         return user_id
     
     def validate_user(self, username: str, password: str) -> int:
-        """Validate whether entered user credentials match database entry
-
-        Args:
-            username (str): Entered username
-            password (str): Entered password
-
-        Returns:
-            int: User ID of user if valid login. If not, returns None.
-        """
         self._setup_connection()
         self.cursor.execute('SELECT * FROM users WHERE username=%s', (username,))
         row = self.cursor.fetchone()
@@ -69,6 +61,24 @@ class Database:
             password_hash = hashlib.sha256(password.encode()).hexdigest()
             if password_hash == row[3]:
                 return row[0]
+            
+    def get_user_row(self, user_id: int):
+        self._setup_connection()
+        
+        self.cursor.execute('SELECT * FROM users WHERE user_id=%s', (user_id,))
+        row = self.cursor.fetchone()
+        
+        self._close_connection()
+        return row
+            
+    def get_random_user(self) -> int:
+        self._setup_connection()
+        
+        self.cursor.execute('SELECT user_id FROM users')
+        user_ids = [row[0] for row in self.cursor.fetchall()]
+        
+        self._close_connection()
+        return rd.choice(user_ids)
     
     # Image methods
     def add_image(self, user_id: int, path: str) -> int:

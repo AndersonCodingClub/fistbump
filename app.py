@@ -30,8 +30,11 @@ def camera():
     if not session.get('user_id'):
         return redirect('/auth/login')
     
+    db = Database()
+    matched_user_name = db.get_user_row(db.get_random_user())[1]
+    
     session['current_streak'] = Streak(session['user_id']).get_streak(session['current_streak'], increment=False)
-    return render_template('camera.html', streak=session['current_streak'])
+    return render_template('camera.html', streak=session['current_streak'], match_name=matched_user_name)
 
 @app.route('/capture', methods=['POST'])
 def capture():
