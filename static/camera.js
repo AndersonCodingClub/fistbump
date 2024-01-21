@@ -8,6 +8,8 @@ let stream;
 let image;
 let imageSavable = false;
 
+captureButton.style.backgroundColor = "rgb(168, 210, 247)";
+captureButton.style.cursor = "pointer";
 discardButton.style.backgroundColor = "rgb(204, 204, 204)";
 discardButton.style.cursor = "default";
 saveButton.style.backgroundColor = "rgb(204, 204, 204)";
@@ -33,6 +35,9 @@ function takePhoto() {
     canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
     image = canvas.toDataURL();
     imageSavable = true;
+    captureButton.style.backgroundColor = "rgb(204, 204, 204)";
+    captureButton.style.cursor = "default";
+
     discardButton.style.backgroundColor = "rgb(229, 156, 154)";
     discardButton.style.cursor = "pointer";
     saveButton.style.backgroundColor = "rgb(188, 180, 247)";
@@ -58,6 +63,10 @@ function discardImage() {
     canvas.getContext('2d').clearRect(0, 0, canvas. width, canvas. height);
     imageSavable = false;
 
+    captureButton.style.backgroundColor = "rgb(168, 210, 247)";
+    captureButton.style.cursor = "pointer";
     discardButton.style.backgroundColor = "rgb(204, 204, 204)";
+    discardButton.style.cursor = "default";
     saveButton.style.backgroundColor = "rgb(204, 204, 204)";
+    saveButton.style.cursor = "default";
 }

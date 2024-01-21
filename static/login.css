@@ -25,7 +25,7 @@ html, body {
 #left {
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
-    background-color: blue;
+    background-color: rgb(87, 81, 136);
     color: #fff;
 }
 
@@ -83,11 +83,11 @@ html, body {
 }
 
 .toggle-link {
-    color: rgb(225, 180, 208);
+    color: rgb(180, 201, 225);
 }
 
 .toggle-link:hover {
-    opacity: 0.75;
+    opacity: 0.7;
 }
 
 .sign-in-text {

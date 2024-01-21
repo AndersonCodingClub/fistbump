@@ -80,6 +80,10 @@ body {
     margin-left: 6vw;
 }
 
+#title:hover {
+    cursor: default;
+}
+
 .gallery-image {
     width: 100%;
     height: 100%;

@@ -38,7 +38,7 @@ def capture():
     decoded_data = base64.b64decode(data.encode('utf-8'))
     
     saved_path = save_image_file(decoded_data)
-    d.add_image(1, saved_path)
+    d.add_image(session['user_id'], saved_path)
     Streak.add_streak()
     
     return 'Successful Upload'
