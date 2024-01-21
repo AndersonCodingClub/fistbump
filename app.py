@@ -10,15 +10,12 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     Streak.check_streak()
-    return render_template('index.html')
-
-@app.route('/wall')
-def wall():
+    
     d = Database()
-    rows = d.get_images()
+    rows = list(reversed(d.get_images()))
     paths = [row[2] for row in rows]
-        
-    return render_template('wallfeed.html', paths=paths)
+    
+    return render_template('index.html', paths=paths)
 
 @app.route('/camera')
 def camera():
@@ -37,7 +34,7 @@ def capture():
     d.add_image(1, saved_path)
     Streak.add_streak()
     
-    return 'Image captured and saved'
+    return 'Successful Upload'
 
 if __name__ == '__main__':
     app.run(port=3000, debug=True)

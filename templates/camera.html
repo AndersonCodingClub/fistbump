@@ -10,12 +10,12 @@
     </head>
     <body>
         <h1 id="title">Let's Fistbump!</h1>
+        <video class="pic" id="video" autoplay></video>
+        <canvas class="pic" id="canvas"></canvas>
 
-        <video id="video" width="640" height="480" autoplay></video>
         <button class="button" id="captureButton" onclick="takePhoto()">Capture</button>
         <button class="button" id="saveButton" onclick="saveImage()">Save Image</button>
         <button class="button" id="discardButton" onclick="discardImage()">Discard Image</button>
-        <canvas id="canvas" width="640" height="480"></canvas>
     
         <script src="static/camera.js"></script>
 

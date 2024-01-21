@@ -5,10 +5,26 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Fistbump</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+        <link rel="stylesheet" href="https://use.typekit.net/clh7vah.css">
+        <script src="https://kit.fontawesome.com/b612a3a6e6.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <button onclick="window.location.href = '/wall'">Fistbump Wall</button>
-        <button onclick="window.location.href = '/camera'">Take Fistbump</button>
+        <div id="nav-bar">
+            <button onclick="window.location.href = '/camera'" class="fistbump-button opacity-hover">Take Fistbump</button>
+            <div id="profile-icon-container">
+                <i class="fa-solid fa-user fa-xl opacity-hover"></i>
+            </div>
+        </div>
+        <div id="center">
+            <div id="tile-container">
+                {% for path in paths %}
+                    <img src="{{ path }}" class="gallery-image">
+                {% endfor %}
+            </div>
+        </div>
+        <div id="nav-bar">
+            <img src="">
+
     </body>
 </html>

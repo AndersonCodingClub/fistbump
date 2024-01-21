@@ -1,5 +1,8 @@
 body {
     background-color: rgb(227, 227, 227);
+    align-items: center;
+    justify-content: center;
+
 }
 
 #title {
@@ -8,4 +11,28 @@ body {
     font-style: normal;
     size: 30px;
     color: rgb(51, 39, 60);
+}
+
+#pictures {
+    width: 30%;
+    height: 30%;
+}
+
+#canvas {
+    position: absolute;
+    left: 20%;
+    top: 20%;
+
+}
+
+#video {
+    position: absolute;
+    left: 20%;
+    top: 20%;
+
+}
+
+
+.button { 
+    
 }

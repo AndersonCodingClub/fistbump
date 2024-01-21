@@ -36,6 +36,8 @@ function saveImage() {
             body: JSON.stringify({ "dataURL": image })
         });
     }
+
+    setTimeout(() => {window.location.href = '/'}, 1000);
 }
 
 function discardImage() {
