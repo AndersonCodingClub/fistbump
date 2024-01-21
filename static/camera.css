@@ -2,6 +2,8 @@ body {
     position: relative;
     background-color: rgb(227, 227, 227);
     text-align: center;
+    font-family: "interstate", sans-serif;
+    color: rgb(51, 39, 60);
 }
 
 #title {
@@ -67,4 +69,5 @@ body {
     font-family: "interstate", sans-serif;
     color: rgb(51, 39, 60);
 }
+
 

@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: rgb(227, 227, 227);
+    font-family: "interstate", sans-serif;
+}
+
+#nav-bar {
+    display: flex;
+    flex-direction: row;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-top: 3.5%;
+    align-items: center;
+}
+
+.log-out-button {
+    color: rgb(51, 39, 60);
+    background-color: rgb(188, 180, 247);
+    width: 192.5px;
+    height: 60px;
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+    font-weight: 900;
+    margin-left: 52vw;
+}
+
+.log-out-button:hover {
+    transition: all .5s ease-in-out;
+    opacity: 0.75;
+    cursor: pointer;
+}
+
+#logo-container {
+    margin-left: 10%;
+}
+
+.back-button {
+    color: rgb(51, 39, 60);
+    background-color: rgb(188, 180, 247);
+    width: 192.5px;
+    height: 60px;
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+    font-weight: 900;
+    margin-left: 6vw;
+}
+
+.back-button:hover {
+    transition: all .5s ease-in-out;
+    opacity: 0.75;
+    cursor: pointer;
+}
+
+#title {
+    display: flex;
+    font-family: "interstate", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    size: 30px;
+    color: rgb(51, 39, 60);
+    margin-left: 75%
+}   
+
+.opacity-hover:hover {
+    transition: all .5s ease-in-out;
+    opacity: 0.75;
+    cursor: pointer;
+}

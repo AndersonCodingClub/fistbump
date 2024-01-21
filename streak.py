@@ -1,25 +1,28 @@
 from datetime import date
+from database import Database
 
 
 class Streak:
-    last_picture_date = None
-    current_streak = 0
+    def __init__(self, user_id: int):
+        self.user_id = user_id
     
-    @staticmethod
-    def add_streak():
-        current_date = date.today()
-        Streak.check_streak()
-        
-        if Streak.last_picture_date is not None:
-            if (current_date - Streak.last_picture_date).days == 1:
-                Streak.current_streak += 1
-                Streak.last_picture_date = current_date
+    def get_streak(self, current_streak: int, increment: bool=False) -> int:
+        db = Database()
+        rows = db.get_images(self.user_id)
+        if len(rows) == 0:
+            return 0
+        elif len(rows) == 1:
+            return 1
         else:
-            Streak.current_streak += 1
-            Streak.last_picture_date = current_date
-    
-    @staticmethod
-    def check_streak():
-        if Streak.last_picture_date is not None:
-            if (date.today() - Streak.last_picture_date).days >= 2:
-                Streak.current_streak = 0
+            most_recent_image_row = rows[-1]
+            last_picture_date = most_recent_image_row[-1].date()
+            current_date = date.today()
+            day_difference = (current_date - last_picture_date).days
+            
+            if day_difference >= 2:
+                return 0
+            else:
+                if increment and day_difference == 1:
+                    return current_streak + 1
+                else:
+                    return current_streak

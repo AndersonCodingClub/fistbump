@@ -36,7 +36,8 @@ class Database:
     def _close_connection(self):
         self.cursor.close()
         self.conn.close()
-        
+    
+    # User methods
     def add_user(self, name: str, username: str, password: str, major: str, year: int) -> int:
         self._setup_connection()
         
@@ -68,7 +69,8 @@ class Database:
             password_hash = hashlib.sha256(password.encode()).hexdigest()
             if password_hash == row[3]:
                 return row[0]
-        
+    
+    # Image methods
     def add_image(self, user_id: int, path: str) -> int:
         self._setup_connection()
         
@@ -81,17 +83,20 @@ class Database:
         self._close_connection()
         return image_id
     
-    def get_images(self):
+    def get_images(self, user_id: int=None):
         self._setup_connection()
         
-        self.cursor.execute('SELECT * FROM images')
+        if user_id:
+            self.cursor.execute('SELECT * FROM images WHERE user_id=%s', (user_id,))
+        else:
+            self.cursor.execute('SELECT * FROM images')
         rows = self.cursor.fetchall()
         
         self._close_connection()
         return rows
     
-    def drop_all_tables(self):
+    def drop_image_table(self):
         self._setup_connection()
-        self.cursor.execute('DROP TABLE users, images')
+        self.cursor.execute('DROP TABLE images')
         self.conn.commit()
         self._close_connection()

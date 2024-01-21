@@ -14,20 +14,24 @@ app.secret_key = os.environ['FLASK_SECRET_KEY']
 
 @app.route('/')
 def home():
-    Streak.check_streak()
-    
+    if not session.get('current_streak') or not session.get('user_id'):
+        session['current_streak'] = 0
+    else:
+        session['current_streak'] = Streak(session['user_id']).get_streak(session['current_streak'], increment=False)
+
     d = Database()
     rows = list(reversed(d.get_images()))
     paths = [row[2] for row in rows]
     
-    return render_template('index.html', paths=paths, streak=Streak.current_streak)
+    return render_template('index.html', paths=paths, streak=session['current_streak'])
 
 @app.route('/camera')
 def camera():
     if not session.get('user_id'):
         return redirect('/auth/login')
-    current_streak = Streak.current_streak
-    return render_template('camera.html', streak=current_streak)
+    
+    session['current_streak'] = Streak(session['user_id']).get_streak(session['current_streak'], increment=False)
+    return render_template('camera.html', streak=session['current_streak'])
 
 @app.route('/capture', methods=['POST'])
 def capture():
@@ -39,7 +43,8 @@ def capture():
     
     saved_path = save_image_file(decoded_data)
     d.add_image(session['user_id'], saved_path)
-    Streak.add_streak()
+    
+    session['current_streak'] = Streak(session['user_id']).get_streak(session['current_streak'], increment=True)
     
     return 'Successful Upload'
 
@@ -95,6 +100,6 @@ def profile():
     if not session.get('user_id'):
         return redirect('/auth/login')
     return render_template('profile.html')
-        
+
 if __name__ == '__main__':
     app.run(port=3000, debug=True)
