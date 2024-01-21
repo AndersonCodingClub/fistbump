@@ -45,6 +45,11 @@ def camera():
     session['current_streak'] = Streak(session['user_id']).get_streak(session['current_streak'], increment=False)
     return render_template('camera.html', streak=session['current_streak'], match_id=matched_user_id, match_name=matched_user_name)
 
+@app.route('/leaderboard')
+
+def leaderboard():
+    return render_template('leaderboard.html')
+
 @app.route('/capture', methods=['POST'])
 def capture():
     d = Database()
@@ -129,9 +134,28 @@ def profile():
 
 @app.route('/user/<user_id>')
 def user_page(user_id):
+    if not session.get('current_streak') or not session.get('user_id'):
+        session['current_streak'] = 0
+    else:
+        session['current_streak'] = Streak(session['user_id']).get_streak(session['current_streak'], increment=False)
+    
     user_row = Database().get_user_row(user_id)
     _, name, username, _, major, year = user_row
-    return str((name, username, major, year))
+    
+    d = Database()
+    rows = list(reversed(d.get_images(user_id)))
+    image_dicts = []
+    for row in rows:
+        _, creator_user_id, match_user_id, img_path, img_date_published = row
+        img_creator_name = Database().get_user_row(creator_user_id)[1]
+        img_match_name = Database().get_user_row(match_user_id)[1]
+        formatted_date_published = str(img_date_published)
+        
+        image_dicts.append({'creator_user_id':creator_user_id, 'creator_name':img_creator_name, 'match_user_id':match_user_id,
+                            'match_name':img_match_name, 'img_path':'/'+img_path, 'formatted_date_published':formatted_date_published})
+    
+    return render_template('user.html', name=name, username=username, major=major, year=year, paths=image_dicts,
+                           streak=session['current_streak'])
 
 if __name__ == '__main__':
     app.run(port=3000, debug=True)
