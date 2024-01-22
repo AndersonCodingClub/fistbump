@@ -28,8 +28,12 @@
                         <p class="name-text">{{ name }}</p>
                         <ul id="stats">
                             <li><span class="important-number">{{ paths|length }}</span> posts</li>
-                            <li class="clickable-item"><span class="important-number">{{ followers|length }}</span> followers</li>
-                            <li class="clickable-item"><span class="important-number">{{ following|length }}</span> following</li>
+                            <li class="clickable-item" onclick="openStatModal('followers')">
+                                <span class="important-number">{{ followers|length }}</span> followers
+                            </li>
+                            <li class="clickable-item" onclick="openStatModal('following')">
+                                <span class="important-number">{{ following|length }}</span> following
+                            </li>
                         </ul>
                         {% if user_id != viewer_user_id %}
                         <div id="actions-wrapper">
@@ -52,6 +56,12 @@
                 {% endfor %}
             </div>
         </div>
+        <script>
+            var viewerUserID = {{ viewer_user_id }};
+            var viewerFollowers = {{ viewer_followers|tojson }};
+            var followers = {{ followers|tojson }};
+            var following = {{ following|tojson }};
+        </script>
         <script src="{{ url_for('static', filename='view_post.js') }}"></script>
         <script src="{{ url_for('static', filename='user.js') }}"></script>
     </body>

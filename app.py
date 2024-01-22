@@ -155,10 +155,17 @@ def user_page(user_id):
     
     db = Database()
     
+    current_viewer_followers = db.get_following(session['user_id'])
     user_row = db.get_user_row(user_id)
     _, name, username, _, major, year = user_row
-    followers = db.get_followers(user_id)
-    following = db.get_following(user_id)
+    followers = []
+    for id_ in db.get_followers(user_id):
+        user_row = db.get_user_row(id_)
+        followers.append((id_, user_row[1], user_row[2]))
+    following = []
+    for id_ in db.get_following(user_id):
+        user_row = db.get_user_row(id_)
+        following.append((id_, user_row[1], user_row[2]))
     
     rows = list(reversed(db.get_images(user_id)))
     image_dicts = []
@@ -173,7 +180,8 @@ def user_page(user_id):
     
     return render_template('user.html', name=name, username=username, major=major, year=year, paths=image_dicts,
                            streak=session['current_streak'], followers=followers, following=following, user_id=int(user_id),
-                           viewer_user_id=session['user_id'], is_following=session['user_id'] in followers)
+                           viewer_user_id=session['user_id'], is_following=session['user_id'] in followers, 
+                           viewer_followers=current_viewer_followers)
     
 @app.route('/follow', methods=['POST'])
 def follow():

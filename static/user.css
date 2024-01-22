@@ -246,3 +246,112 @@ body {
 .unset-a {
     all: unset;
 }
+
+.stat-modal-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 10;
+    overflow: auto;
+    flex-direction: column;
+}
+
+.stat-modal {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 25px;
+    width: 400px;
+    height: 500px;
+}
+
+.modal-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    border-bottom-style: solid;
+    border-bottom-color: darkgray;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.modal-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+    padding: 20px 20px 20px 20px;
+}
+
+.modal-profile-picture {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.modal-info-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0px;
+    margin-top: -5px;
+}
+
+.modal-name {
+    font-weight: 600;
+}
+
+.modal-username {
+    font-size: 14px;
+    font-style: italic;
+    color: rgb(132, 132, 132);
+}
+
+.modal-name, .modal-username {
+    padding: 0;
+    margin: 0;
+}
+
+.modal-follow-container {
+    margin-left: 100px;
+}
+
+.modal-follow-button {
+    background-color: rgb(168, 210, 247);
+    width: 65px;
+    height: 40px;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    margin-right: 20px;
+    transition: all .5s ease-in-out;
+}
+
+.modal-unfollow-button {
+    background-color: rgb(204, 204, 204) !important;
+    width: 85px !important;
+    height: 40px;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    margin-right: 20px;
+    transition: all .5s ease-in-out;
+}
+
+.modal-follow-button:hover, .modal-unfollow-button {
+    opacity: 0.75;
+    cursor: pointer;
+}

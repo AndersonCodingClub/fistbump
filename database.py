@@ -150,3 +150,9 @@ class Database:
         self.cursor.execute('DROP TABLE images')
         self.conn.commit()
         self._close_connection()
+        
+    def drop_followers_table(self):
+        self._setup_connection()
+        self.cursor.execute('DROP TABLE followers')
+        self.conn.commit()
+        self._close_connection()
