@@ -65,6 +65,7 @@ function openStatModal(modalType) {
         const modalProfilePicture = document.createElement('img');
         modalProfilePicture.src = '/static/media/blank_pfp.jpeg';
         modalProfilePicture.className = 'modal-profile-picture';
+        modalProfilePicture.onclick = function() { window.location.href = '/user/' + modalRowUserID; };
         modalRow.appendChild(modalProfilePicture);
 
         const modalInfoContainer = document.createElement('div');
@@ -73,11 +74,13 @@ function openStatModal(modalType) {
         const modalName = document.createElement('p');
         modalName.className = 'modal-name';
         modalName.textContent = modalRowName;
+        modalName.onclick = function() { window.location.href = '/user/' + modalRowUserID; };
 
         const modalUsername = document.createElement('p');
         modalUsername.className = 'modal-username';
         modalUsername.textContent = modalRowUsername;
-
+        modalUsername.onclick = function() { window.location.href = '/user/' + modalRowUserID; };
+        
         modalInfoContainer.appendChild(modalName);
         modalInfoContainer.appendChild(modalUsername);
 

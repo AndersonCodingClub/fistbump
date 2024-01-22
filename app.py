@@ -180,7 +180,7 @@ def user_page(user_id):
     
     return render_template('user.html', name=name, username=username, major=major, year=year, paths=image_dicts,
                            streak=session['current_streak'], followers=followers, following=following, user_id=int(user_id),
-                           viewer_user_id=session['user_id'], is_following=session['user_id'] in followers, 
+                           viewer_user_id=session['user_id'], is_following=session['user_id'] in [x[0] for x in followers], 
                            viewer_followers=current_viewer_followers)
     
 @app.route('/follow', methods=['POST'])

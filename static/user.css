@@ -299,6 +299,10 @@ body {
     border-radius: 50%;
 }
 
+.modal-profile-picture:hover {
+    cursor: pointer;
+}
+
 .modal-info-container {
     display: flex;
     flex-direction: column;
@@ -319,6 +323,10 @@ body {
 .modal-name, .modal-username {
     padding: 0;
     margin: 0;
+}
+
+.modal-name:hover, .modal-username:hover {
+    cursor: pointer;
 }
 
 .modal-follow-container {
