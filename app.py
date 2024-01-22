@@ -1,5 +1,6 @@
 import os
 import base64
+import datetime as dt
 from streak import Streak
 from database import Database
 from dotenv import load_dotenv
@@ -25,7 +26,7 @@ def home():
     if feed_type == 'fyp' and not session.get('user_id'):
         return redirect('/auth/login')
     elif feed_type == 'fyp':
-        following = db.get_followers(session['user_id'])
+        following = db.get_following(session['user_id'])
     
     rows = list(reversed(db.get_images()))
     image_dicts = []
@@ -37,7 +38,7 @@ def home():
         
         img_creator_name = Database().get_user_row(creator_user_id)[1]
         img_match_name = Database().get_user_row(match_user_id)[1]
-        formatted_date_published = str(img_date_published)
+        formatted_date_published = img_date_published.strftime('%Y-%m-%d %I:%M:%S %p')
         
         image_dicts.append({'creator_user_id':creator_user_id, 'creator_name':img_creator_name, 'match_user_id':match_user_id,
                             'match_name':img_match_name, 'img_path':img_path, 'formatted_date_published':formatted_date_published})
