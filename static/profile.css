@@ -248,11 +248,8 @@ h1 {
 
 .setting-icon-overlay > * {
     pointer-events: none;
-    tab-index = "-1";
     transition: transform 0.5s;
-    transform: translateX(30px);
-
-   
+    transform: translateX(30px);   
 }
 
 .setting-icon-overlay:hover {

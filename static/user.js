@@ -85,19 +85,21 @@ function openStatModal(modalType) {
         modalInfoContainer.appendChild(modalUsername);
 
         const modalFollowButtonContainer = document.createElement('div');
-        modalFollowButtonContainer.className = 'modal-follow-container';
-        const followActionButton = document.createElement('button');
-        followActionButton.setAttribute('data-following-id', modalRowUserID);
 
-        if (viewerFollowers.includes(modalRowUserID)) {
-            followActionButton.className = 'modal-unfollow-button';
-            followActionButton.textContent = 'Unfollow';
-        } else {
-            followActionButton.className = 'modal-follow-button';
-            followActionButton.textContent = 'Follow';
+        if (modalRowUserID !=viewerUserID) {
+            modalFollowButtonContainer.className = 'modal-follow-container';
+            const followActionButton = document.createElement('button');
+            followActionButton.setAttribute('data-following-id', modalRowUserID);
+            if (viewerFollowers.includes(modalRowUserID)) {
+                followActionButton.className = 'modal-unfollow-button';
+                followActionButton.textContent = 'Unfollow';
+            } else {
+                followActionButton.className = 'modal-follow-button';
+                followActionButton.textContent = 'Follow';
+            }
+
+            modalFollowButtonContainer.appendChild(followActionButton);
         }
-
-        modalFollowButtonContainer.appendChild(followActionButton);
 
         modalRow.appendChild(modalInfoContainer);
         modalRow.appendChild(modalFollowButtonContainer);

@@ -55,7 +55,7 @@ function saveImage() {
         });
         saveButton.style.backgroundColor = "rgb(180, 247, 209)";
 
-        setTimeout(() => {window.location.href = '/'}, 1000);
+        setTimeout(() => {window.location.href = '/'}, 250);
     }
 }
 
