@@ -15,12 +15,12 @@ app.secret_key = os.environ['FLASK_SECRET_KEY']
 
 @app.route('/')
 def home():
-    if not session.get('current_streak') or not session.get('user_id'):
-        session['current_streak'] = 0
-    else:
-        session['current_streak'] = Streak(session['user_id']).get_streak(session['current_streak'], increment=False)
-
     db = Database()
+
+    if not session.get('user_id'):
+        current_streak = 0
+    else:
+        current_streak = Streak(session['user_id']).handle_streak()
 
     feed_type = request.args.get('feed-type', 'global')
     if feed_type == 'fyp' and not session.get('user_id'):
@@ -43,7 +43,7 @@ def home():
         image_dicts.append({'creator_user_id':creator_user_id, 'creator_name':img_creator_name, 'match_user_id':match_user_id,
                             'match_name':img_match_name, 'img_path':img_path, 'formatted_date_published':formatted_date_published})
     
-    return render_template('index.html', paths=image_dicts, streak=session['current_streak'], feed_type=feed_type)
+    return render_template('index.html', paths=image_dicts, streak=current_streak, feed_type=feed_type)
 
 @app.route('/camera')
 def camera():
@@ -53,9 +53,10 @@ def camera():
     db = Database()
     matched_user_id = db.get_random_user(session['user_id'])
     matched_user_name = db.get_user_row(matched_user_id)[1]
+
+    current_streak = Streak(session['user_id']).handle_streak()
     
-    session['current_streak'] = Streak(session['user_id']).get_streak(session['current_streak'], increment=False)
-    return render_template('camera.html', streak=session['current_streak'], match_id=matched_user_id, match_name=matched_user_name)
+    return render_template('camera.html', streak=current_streak, match_id=matched_user_id, match_name=matched_user_name)
 
 @app.route('/leaderboard')
 def leaderboard():
@@ -71,9 +72,8 @@ def capture():
     decoded_data = base64.b64decode(data.encode('utf-8'))
     
     saved_path = save_image_file(decoded_data)
+    Streak(session['user_id']).handle_streak(increment=True)
     db.add_image(session['user_id'], saved_path, fistbump_match_id)
-    
-    session['current_streak'] = Streak(session['user_id']).get_streak(session['current_streak'], increment=True)
     
     return {'success':True}
 
@@ -150,16 +150,11 @@ def user_page(user_id):
     if not session.get('user_id'):
         return redirect('/auth/login')
     
-    if not session.get('current_streak') or not session.get('user_id'):
-        session['current_streak'] = 0
-    else:
-        session['current_streak'] = Streak(session['user_id']).get_streak(session['current_streak'], increment=False)
-    
     db = Database()
     
     current_viewer_followers = db.get_following(session['user_id'])
     user_row = db.get_user_row(user_id)
-    _, name, username, _, major, year = user_row
+    _, name, username, _, major, year, _ = user_row
     followers = []
     for id_ in db.get_followers(user_id):
         user_row = db.get_user_row(id_)
@@ -181,9 +176,8 @@ def user_page(user_id):
                             'match_name':img_match_name, 'img_path':'/'+img_path, 'formatted_date_published':formatted_date_published})
     
     return render_template('user.html', name=name, username=username, major=major, year=year, paths=image_dicts,
-                           streak=session['current_streak'], followers=followers, following=following, user_id=int(user_id),
-                           viewer_user_id=session['user_id'], is_following=session['user_id'] in [x[0] for x in followers], 
-                           viewer_followers=current_viewer_followers)
+                           followers=followers, following=following, user_id=int(user_id), viewer_user_id=session['user_id'], 
+                           is_following=session['user_id'] in [x[0] for x in followers], viewer_followers=current_viewer_followers)
     
 @app.route('/follow', methods=['POST'])
 def follow():
