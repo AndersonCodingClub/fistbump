@@ -19,7 +19,8 @@ class Database:
                 username VARCHAR(255) NOT NULL,
                 password VARCHAR(255) NOT NULL,
                 major VARCHAR(255),
-                year INT
+                year INT,
+                streak INT NOT NULL DEFAULT 0
             )
         ''')
         
@@ -90,6 +91,26 @@ class Database:
         
         self._close_connection()
         return rd.choice(user_ids)
+    
+    def get_streak(self, user_id: int) -> int:
+        self._setup_connection()
+        self.cursor.execute('SELECT streak FROM users WHERE user_id=%s', (user_id,))
+        row = self.cursor.fetchone()
+        
+        self._close_connection()
+        return row
+    
+    def increment_streak(self, user_id: int) -> int:
+        self._setup_connection()
+        self.cursor.execute('UPDATE users SET streak=streak+1 WHERE user_id=%s', (user_id,))
+        self.conn.commit()
+        self._close_connection()
+    
+    def set_streak(self, user_id: int, value: int) -> int:
+        self._setup_connection()
+        self.cursor.execute('UPDATE users SET streak=%s WHERE user_id=%s', (value, user_id))
+        self.conn.commit()
+        self._close_connection()
     
     # Follow methods
     def add_follower(self, follower_id: int, following_id: int):
