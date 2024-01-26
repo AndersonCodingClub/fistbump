@@ -93,6 +93,16 @@ class Database:
         self._close_connection()
         return rd.choice(user_ids)
     
+    def search_users(self, name_to_match: str) -> List[Tuple]:
+        self._setup_connection()
+        
+        search_term = f'%{name_to_match}%'
+        self.cursor.execute("SELECT * FROM users WHERE name LIKE %s OR username LIKE %s", (search_term, search_term))
+        rows = self.cursor.fetchall()
+        
+        self._close_connection()
+        return rows
+    
     # Streak methods
     def get_streak(self, user_id: int) -> int:
         self._setup_connection()
