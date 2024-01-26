@@ -24,6 +24,17 @@ class Database:
                 streak INT NOT NULL DEFAULT 0
             )
         ''')
+
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS matches (
+                match_id INT AUTO_INCREMENT PRIMARY KEY,
+                user1_id INT NOT NULL,
+                user2_id INT NOT NULL,
+                status VARCHAR(255) NOT NULL DEFAULT 'pending',
+                FOREIGN KEY (user1_id) REFERENCES users(user_id),
+                FOREIGN KEY (user2_id) REFERENCES users(user_id)
+            )
+        ''')
         
         self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS followers (
@@ -95,7 +106,7 @@ class Database:
     
     def search_users(self, name_to_match: str) -> List[Tuple]:
         self._setup_connection()
-        
+
         search_term = f'%{name_to_match}%'
         self.cursor.execute("SELECT * FROM users WHERE name LIKE %s OR username LIKE %s", (search_term, search_term))
         rows = self.cursor.fetchall()
@@ -103,6 +114,35 @@ class Database:
         self._close_connection()
         return rows
     
+    # Match methods
+    def add_match(self, user1_id: int, user2_id: int) -> int:
+        self._setup_connection()
+        
+        insert_query = 'INSERT INTO matches (user1_id, user2_id) VALUES (%s, %s)'
+        row = (user1_id, user2_id)
+        self.cursor.execute(insert_query, row)
+        self.conn.commit()
+        match_id = self.cursor.lastrowid
+        
+        self._close_connection()
+        return match_id
+    
+    def get_match_row(self, user_id: int) -> List[Tuple]:
+        self._setup_connection()
+        
+        select_query = 'SELECT * FROM matches WHERE user1_id=%s OR user2_id=%s'
+        self.cursor.execute(select_query, (user_id, user_id))
+        match = self.cursor.fetchone()
+        
+        self._close_connection()
+        return match
+    
+    def set_match_status_to_done(self, user_id: int):
+        self._setup_connection()
+        self.cursor.execute('UPDATE matches SET status="done" WHERE (user1_id=%s OR user2_id=%s)', (user_id, user_id))
+        self.conn.commit()
+        self._close_connection()
+        
     # Streak methods
     def get_streak(self, user_id: int) -> int:
         self._setup_connection()
