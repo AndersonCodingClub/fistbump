@@ -1,11 +1,10 @@
 import os
 import base64
-import datetime as dt
 from streak import Streak
 from database import Database
 from dotenv import load_dotenv
 from save import save_image_file
-from flask import Flask, render_template, redirect, request, session
+from flask import Flask, render_template, redirect, request, session, jsonify
 
 
 load_dotenv('config.env')
@@ -200,6 +199,18 @@ def unfollow():
     db.remove_follower(follower_id, following_id)
     
     return {'success':True}
+
+@app.route('/search/<query>', methods=['POST'])
+def user_search(query):    
+    db = Database()
+    rows = db.search_users(query)
+    
+    search_dicts = []
+    for user_row in rows:
+        search_dict = {'user_id':user_row[0], 'name':user_row[1], 'username':user_row[2]}
+        search_dicts.append(search_dict)
+
+    return search_dicts
 
 if __name__ == '__main__':
     app.run(port=3000, debug=True)
