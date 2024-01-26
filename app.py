@@ -60,7 +60,11 @@ def camera():
 
 @app.route('/leaderboard')
 def leaderboard():
-    return render_template('leaderboard.html')
+    db = Database()
+    raw_streak_rows = sorted(db.get_streaks(), key=lambda row: row[1], reverse=True)
+    streak_rows = [(row[0], db.get_user_row(row[0])[1], row[1]) for row in raw_streak_rows]
+    
+    return render_template('leaderboard.html', streaks=streak_rows)
 
 @app.route('/capture', methods=['POST'])
 def capture():

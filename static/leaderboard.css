@@ -4,7 +4,6 @@ body {
     overflow-x: hidden;
     background-color: rgb(227, 227, 227);
     font-family: "interstate", sans-serif;
-    text-align: center;
 }
 
 #navbar {
@@ -53,5 +52,29 @@ body {
 
 #list {
     position: absolute;
-    left: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.lb-row {
+    font-size: 22px;
+    color: #372F35;
+}
+
+.lb-row:hover {
+    cursor: default;
+}
+
+.position {
+    font-weight: 600;
+}
+
+.name-hover {
+    all: unset;
+    font-weight: 600;
+}
+
+.name-hover:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }

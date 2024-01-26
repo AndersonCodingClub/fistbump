@@ -2,6 +2,7 @@ import os
 import hashlib
 import random as rd
 import mysql.connector
+from typing import List, Tuple
 
 
 class Database:
@@ -74,7 +75,7 @@ class Database:
             if password_hash == row[3]:
                 return row[0]
             
-    def get_user_row(self, user_id: int):
+    def get_user_row(self, user_id: int) -> Tuple:
         self._setup_connection()
         
         self.cursor.execute('SELECT * FROM users WHERE user_id=%s', (user_id,))
@@ -92,6 +93,7 @@ class Database:
         self._close_connection()
         return rd.choice(user_ids)
     
+    # Streak methods
     def get_streak(self, user_id: int) -> int:
         self._setup_connection()
         
@@ -117,6 +119,15 @@ class Database:
         
         return value
     
+    def get_streaks(self) -> List[int]:
+        self._setup_connection()
+        
+        self.cursor.execute('SELECT user_id, streak FROM users')
+        rows = self.cursor.fetchall()
+        
+        self._close_connection()
+        return rows
+    
     # Follow methods
     def add_follower(self, follower_id: int, following_id: int):
         self._setup_connection()
@@ -132,14 +143,14 @@ class Database:
         self.conn.commit()
         self._close_connection()
         
-    def get_followers(self, user_id: int):
+    def get_followers(self, user_id: int) -> List[int]:
         self._setup_connection()
         self.cursor.execute('SELECT follower_id FROM followers WHERE following_id=%s', (user_id,))
         followers = [row[0] for row in self.cursor.fetchall()]
         self._close_connection()
         return followers
         
-    def get_following(self, user_id: int):
+    def get_following(self, user_id: int) -> List[int]:
         self._setup_connection()
         self.cursor.execute('SELECT following_id FROM followers WHERE follower_id=%s', (user_id,))
         following = [row[0] for row in self.cursor.fetchall()]
@@ -159,7 +170,7 @@ class Database:
         self._close_connection()
         return image_id
     
-    def get_images(self, user_id: int=None):
+    def get_images(self, user_id: int=None) -> List[Tuple]:
         self._setup_connection()
         
         if user_id:
@@ -180,11 +191,5 @@ class Database:
     def drop_followers_table(self):
         self._setup_connection()
         self.cursor.execute('DROP TABLE followers')
-        self.conn.commit()
-        self._close_connection()
-        
-    def temp(self, num):
-        self._setup_connection()
-        self.cursor.execute(f'DELETE FROM images WHERE image_id={num}')
         self.conn.commit()
         self._close_connection()
