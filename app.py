@@ -102,8 +102,10 @@ def auth_signup():
         username = request.form['username']
         password = request.form['password']
         major, year = request.form.get('major'), request.form.get('year')
-        if year:
+        if year and year.isdigit():
             year = int(year)
+        elif not year.isdigit():
+            return render_template('signup.html', bad_attempt=True, bad_year=True)
         
         if not Database().validate_user(username, password):
             user_id = Database().add_user(name, username, password, major, year)

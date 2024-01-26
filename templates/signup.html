@@ -10,7 +10,7 @@
     </head>
     <body style="background-image: url('{{ url_for('static', filename='media/pastel_gradient.png') }}'); background-size: cover;">
         <div id="center-container">
-            <div id="login-bounding-box">
+            <div id="login-bounding-box" style="height: 90vh;">
                 <div id="left">
                     <div id="logo-container" onclick="window.location.href='/'">
                         <p class="logo-type">Fistbump</p>
@@ -39,7 +39,11 @@
                     <div id="incorrect-attempt">
                         <div id="red-stripe"></div>
                         <div id="incorrect-attempt-message">
+                            {% if bad_year %}
+                            <p>Invalid year: must be number</p>
+                            {% else %}
                             <p>Username already taken</p>
+                            {% endif %}
                         </div>
                     </div>
                     {% endif %}
