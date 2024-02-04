@@ -4,6 +4,7 @@ from streak import Streak
 from database import Database
 from dotenv import load_dotenv
 from save import save_image_file
+from flask_wtf.csrf import CSRFProtect
 from flask import Flask, render_template, redirect, request, session, jsonify
 
 
@@ -11,6 +12,7 @@ load_dotenv('config.env')
 
 app = Flask(__name__)
 app.secret_key = os.environ['FLASK_SECRET_KEY']
+csrf = CSRFProtect(app)
 
 @app.route('/')
 def home():

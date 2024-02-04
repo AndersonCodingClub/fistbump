@@ -28,6 +28,7 @@
                 <div id="right">
                     <p class="large-text sign-in-text">Sign In</p>
                     <form id="auth-form" action="/auth/login" method="POST">
+                        {{ csrf_token() }}
                         <input class="input" type="text" name="username" required autofocus placeholder="Username" autocomplete="off">
                         <input class="input" type="password" name="password" id="password" required placeholder="Password" autocomplete="off">
                         <div id="show-password">

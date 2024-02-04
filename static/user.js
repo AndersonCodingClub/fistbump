@@ -1,10 +1,12 @@
+const csrftoken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 let followButton = document.getElementById('follow-button');
 
 function followUser(followerID, followingID) {
     fetch('/follow', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
         },
         body: JSON.stringify({ "followerID": followerID, "followingID": followingID })
     }).then(response => {
@@ -18,7 +20,8 @@ function unfollowUser(followerID, followingID) {
     fetch('/unfollow', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
         },
         body: JSON.stringify({ "followerID": followerID, "followingID": followingID })
     }).then(response => {

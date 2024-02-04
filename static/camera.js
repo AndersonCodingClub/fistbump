@@ -1,3 +1,4 @@
+const csrftoken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const captureButton = document.getElementById('captureButton');
@@ -49,7 +50,8 @@ function saveImage() {
         fetch('/capture', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
             },
             body: JSON.stringify({ "dataURL": image, "matchID":match_id })
         });
