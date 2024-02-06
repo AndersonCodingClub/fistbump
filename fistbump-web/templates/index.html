@@ -9,8 +9,20 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     </head>
     <body>
-        <div id="grayed-out-background" onclick='closeWaitlist()'>
-            <div id="waitlist-modal"></div>
+        <div id="grayed-out-background">
+            <div id="waitlist-modal">
+                <div id="modal-content-container">
+                    <div id="modal-text-container">
+                        <p class="modal-title-text">Join the Waitlist</p>
+                        <p class="modal-subtext">
+                            Fistbump is currently in early stage development and are working hard to build
+                            a completely unique social experience. If you join the waitlist, we'll be sure
+                            to shoot you an invite as soon as possible!
+                        </p>
+                    </div>
+
+                </div>
+            </div>
         </div>
         <div id="nav-bar">
             <img src="{{ url_for('static', filename='fistbump_icon.png') }}" class="icon">
