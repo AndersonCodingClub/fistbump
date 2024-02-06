@@ -12,6 +12,14 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route('/save-waitlist-entry', methods=['POST'])
 def save_waitlist_entry():
     data = request.json

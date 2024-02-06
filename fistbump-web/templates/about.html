@@ -3,10 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Fistbump</title>
+        <title>Fistbump | About</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/nav.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/waitlist.css') }}">
         <link rel="icon" href="{{ url_for('static', filename='media/favicon.ico') }}">
@@ -45,7 +44,9 @@
             </div>
         </div>
         <div id="nav-bar">
-            <img src="{{ url_for('static', filename='media/fistbump_icon.png') }}" class="icon">
+            <a href='/' class="unset-a">
+                <img src="{{ url_for('static', filename='media/fistbump_icon.png') }}" class="icon">
+            </a>
             <div id="nav-option-container">
                 <a href="/blog" class="unset-a">
                     <p class="option-text">blog</p>
@@ -54,18 +55,6 @@
                     <p class="option-text">about</p>
                 </a>
                 <p class="option-text" onclick='openWaitlist()'>waitlist</p>
-            </div>
-        </div>
-        <div class="logo-container">
-            <div class="logo-wrapper">
-                <p class="logo-text">Fistbump</p>
-                <p class='caption-text'>Connect in the real world.</p>
-                <div class="center-hero">
-                    <div class="button-container">
-                        <button class="hero-button hero-waitlist" onclick='openWaitlist()'>waitlist</button>
-                        <button class="hero-button hero-blog" onclick="window.location.href='/blog'">blog</button>
-                    </div>
-                </div>
             </div>
         </div>
         <script src="{{ url_for('static', filename='waitlist.js') }}"></script>
