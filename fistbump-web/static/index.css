@@ -26,12 +26,6 @@ body {
 .icon {
     height: 80px;
     width: 80px;
-    transition: all 0.35s ease-in-out;
-}
-
-.icon:hover {
-    cursor: pointer;
-    opacity: 0.7;
 }
 
 #nav-option-container {
@@ -40,6 +34,7 @@ body {
     margin-left: 65%;
     margin-top: 19.5px;
     column-gap: 60px;
+    color: #372F35;
 }
 
 .unset-a {
@@ -72,6 +67,7 @@ body {
 .logo-text {
     font-size: 95px;
     color: #372F35;
+    cursor: default;
 }
 
 .caption-text {
