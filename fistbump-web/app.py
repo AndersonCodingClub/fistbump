@@ -1,6 +1,6 @@
 import os
-from flask import Flask
 from dotenv import load_dotenv
+from flask import Flask, render_template
 
 
 load_dotenv('config.env')
@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return 'Hello, World!'
+    return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(os.environ['HOST'], int(os.environ['PORT']))
+    app.run(os.environ['HOST'], int(os.environ['PORT']), debug=True)
