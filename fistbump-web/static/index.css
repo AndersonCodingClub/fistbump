@@ -29,9 +29,9 @@ body {
     background-color: white;
     width: 50%;
     height: fit-content;
-    padding-bottom: 2.5%;
+    padding-bottom: 1.5%;
     min-height: 300px;
-    min-width: 400px;
+    min-width: 450px;
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
@@ -47,6 +47,16 @@ body {
     width: 80%;
     height: 100%;
     padding: 0 10% 0 10%;
+}
+
+#confirmation-text-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 15px;
+    font-size: 16px;
+    margin-top: 40px;
+    color: green;
 }
 
 .modal-title-text {
@@ -107,6 +117,16 @@ body {
 .modal-submit.active:hover {
     cursor: pointer;
     opacity: 0.7;
+}
+
+.modal-cancel {
+    color: #372F35;
+    font-size: 20px;
+    margin-top: 0px;
+}
+
+.modal-cancel:hover {
+    cursor: pointer;
 }
 
 #nav-bar {

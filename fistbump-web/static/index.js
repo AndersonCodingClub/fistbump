@@ -19,16 +19,17 @@ document.addEventListener('DOMContentLoaded', function() {
     updateButtonState();
 });
 
-
-const grayBackground = document.getElementById('grayed-out-background');
-const waitlistModal = document.getElementById('waitlist-modal');
+function sendWaitlistEntry() {
+    document.getElementById('modal-input-container').style.display = 'none';
+    document.getElementById('confirmation-container').style.display = 'block';
+}
 
 function openWaitlist() {
-    grayBackground.style.display = 'block';
+    document.getElementById('grayed-out-background').style.display = 'block';
 }
 
 function closeWaitlist() {
-    grayBackground.style.display = 'none';
+    document.getElementById('grayed-out-background').style.display = 'none';
 }
 
 document.addEventListener('keydown', function(e) {

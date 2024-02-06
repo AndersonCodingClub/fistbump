@@ -17,15 +17,26 @@
                         <p class="modal-title-text">Join the Waitlist</p>
                         <p class="modal-subtext">
                             Fistbump is currently in early stage development and are working hard to build
-                            a completely unique social experience. If you join the waitlist, we'll be sure
-                            to shoot you an invite as soon as possible!
+                            a completely unique social experience. Sign up for the waitlist to get access
+                            as soon as space opens up.
                         </p>
                     </div>
-                    <form id="modal-input-container">
-                        <input placeholder="Name" name="name" id="name" class="modal-input" autocomplete="off" spellcheck="false"></input>
-                        <input placeholder="Email" name="email" id="email" class="modal-input" autocomplete="off" spellcheck="false"></input>
+                    <div id="confirmation-container" style="display: none;">
+                        <div id="confirmation-text-container">
+                            <svg viewBox="0 0 448 512" height="20" width="20" tabindex="-1">
+                                <path fill="green" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
+                            </svg>
+                            <p>Your information has been saved! We'll shoot you an invite as soon as possible!</p>
+                        </div>
+                    </div>
+                    <form id="modal-input-container" onsubmit="event.preventDefault(); return sendWaitlistEntry()">
+                        <input placeholder="Name" id="name" class="modal-input" autocomplete="off" spellcheck="false"></input>
+                        <input placeholder="Email" id="email" class="modal-input" autocomplete="off" spellcheck="false"></input>
                         <div id="modal-submit-container">
                             <input type="submit" value="Submit" class="modal-submit disabled"></input>
+                        </div>
+                        <div onclick='closeWaitlist()'>
+                            <p class='modal-cancel'>Cancel</p>
                         </div>
                     </form>
                 </div>
