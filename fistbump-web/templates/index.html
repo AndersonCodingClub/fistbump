@@ -9,6 +9,9 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     </head>
     <body>
+        <div id="grayed-out-background" onclick='closeWaitlist()'>
+            <div id="waitlist-modal"></div>
+        </div>
         <div id="nav-bar">
             <img src="{{ url_for('static', filename='fistbump_icon.png') }}" class="icon">
             <div id="nav-option-container">
@@ -18,9 +21,7 @@
                 <a href="/about" class="unset-a">
                     <p class="option-text">about</p>
                 </a>
-                <a href="/waitlist" class="unset-a">
-                    <p class="option-text">waitlist</p>
-                </a>
+                <p class="option-text" onclick='openWaitlist()'>waitlist</p>
             </div>
         </div>
         <div class="logo-container">
@@ -29,11 +30,12 @@
                 <p class='caption-text'>Connect in the real world.</p>
                 <div class="center-hero">
                     <div class="button-container">
-                        <button class="hero-button hero-waitlist">waitlist</button>
+                        <button class="hero-button hero-waitlist" onclick='openWaitlist()'>waitlist</button>
                         <button class="hero-button hero-blog">blog</button>
                     </div>
                 </div>
             </div>
         </div>
+        <script src="{{ url_for('static', filename='index.js') }}"></script>
     </body>
 </html>
