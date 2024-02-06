@@ -15,11 +15,52 @@ body {
     padding: 0;
 }
 
+#nav-bar {
+    display: flex;
+    flex-direction: row;
+    padding-left: 100px;
+    padding-top: 35px;
+    height: fit-content;
+}
+
+.icon {
+    height: 80px;
+    width: 80px;
+    transition: all 0.35s ease-in-out;
+}
+
+.icon:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+#nav-option-container {
+    display: flex;
+    flex-direction: row;
+    margin-left: 65%;
+    margin-top: 24px;
+    column-gap: 60px;
+}
+
+.unset-a {
+    all: unset;
+}
+
+.unset-a:hover {
+    color: #FFE450;
+    cursor: pointer;
+}
+
+.option-text {
+    font-family: 'Roobert-Bold';
+    font-size: 18px;
+}
+
 .logo-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 23vh;
+    margin-top: 10vh;
 }
 
 .logo-wrapper {
@@ -51,6 +92,7 @@ body {
 }
 
 .hero-button {
+    font-family: 'Roobert-Bold';
     border: none;
     font-size: 16px;
     width: 100px;
@@ -71,4 +113,22 @@ body {
 
 .hero-blog {
     background-color: #F9724D;
+}
+
+@media only screen and (max-width: 991px){
+    #nav-option-container {
+        margin-left: 50%;
+    }
+}
+
+@media only screen and (max-width: 800px){
+    #nav-option-container {
+        margin-left: 40%;
+    }
+}
+
+@media only screen and (max-width: 700px){
+    #nav-option-container {
+        margin-left: 30%;
+    }
 }
