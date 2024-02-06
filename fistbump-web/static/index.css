@@ -18,7 +18,8 @@ body {
 .logo-container {
     display: flex;
     justify-content: center;
-    margin-top: 25vh;
+    align-items: center;
+    margin-top: 23vh;
 }
 
 .logo-wrapper {
@@ -28,12 +29,46 @@ body {
 }
 
 .logo-text {
-    font-size: 85px;
-    color: '#372F35',
+    font-size: 95px;
+    color: #372F35;
 }
 
 .caption-text {
-    margin-top: -68px;
+    margin-top: -77px;
     font-size: 21px;
-    color: '#372F35',
+    color: #372F35;
+}
+
+.center-hero {
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+}
+
+.button-container {
+    margin-top: 20px;
+    column-gap: 20px;
+}
+
+.hero-button {
+    border: none;
+    font-size: 16px;
+    width: 100px;
+    height: 50px;
+    margin-right: 20px;
+    transition: all 0.35s ease-in-out;
+    color: #372F35;
+}
+
+.hero-button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.hero-waitlist {
+    background-color: #FFE450;
+}
+
+.hero-blog {
+    background-color: #F9724D;
 }
