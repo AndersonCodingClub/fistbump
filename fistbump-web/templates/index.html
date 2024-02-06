@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Fistbump</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
@@ -20,7 +20,13 @@
                             to shoot you an invite as soon as possible!
                         </p>
                     </div>
-
+                    <form id="modal-input-container">
+                        <input placeholder="Name" name="name" id="name" class="modal-input" autocomplete="off" spellcheck="false"></input>
+                        <input placeholder="Email" name="email" id="email" class="modal-input" autocomplete="off" spellcheck="false"></input>
+                        <div id="modal-submit-container">
+                            <input type="submit" value="Submit" class="modal-submit disabled"></input>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

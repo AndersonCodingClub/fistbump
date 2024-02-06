@@ -1,3 +1,25 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const submitButton = document.querySelector('.modal-submit');
+
+    function updateButtonState() {
+        if (nameInput.value.trim().length > 0 && emailInput.value.trim().length > 0) {
+            submitButton.classList.add('active');
+            submitButton.disabled = false;
+        } else {
+            submitButton.classList.remove('active');
+            submitButton.disabled = true;
+        }
+    }
+
+    nameInput.addEventListener('input', updateButtonState);
+    emailInput.addEventListener('input', updateButtonState);
+
+    updateButtonState();
+});
+
+
 const grayBackground = document.getElementById('grayed-out-background');
 const waitlistModal = document.getElementById('waitlist-modal');
 

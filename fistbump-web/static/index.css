@@ -28,7 +28,8 @@ body {
     position: absolute;
     background-color: white;
     width: 50%;
-    height: 50%;
+    height: fit-content;
+    padding-bottom: 2.5%;
     min-height: 300px;
     min-width: 400px;
     top: 50%;
@@ -56,6 +57,56 @@ body {
 .modal-subtext {
     margin-top: -20px;
     font-size: 18px;
+}
+
+#modal-input-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+    margin-top: 15px;
+}
+
+.modal-input {
+    color: #372F35;
+    border-color: rgb(194, 204, 214);
+    border-style: solid;
+    border-width: 1px;
+    padding: 10px 20px 10px 20px;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+#modal-submit-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+}
+
+.modal-submit {
+    width: 50%;
+    border-radius: 25px;
+    border: none;
+    padding: 15px 10px 15px 10px;
+    transition: all 0.35s ease-in-out;
+    font-size: 18px;
+    font-family: 'Roobert-Bold';
+    background-color: rgb(55, 47, 53, 0.3);
+    color: rgb(55, 47, 53, 0.7);
+}
+
+.modal-submit:hover {
+    cursor: default;
+}
+
+.modal-submit.active {
+    background-color: #6FB4EB;
+    color: white;
+}
+
+.modal-submit.active:hover {
+    cursor: pointer;
+    opacity: 0.7;
 }
 
 #nav-bar {
