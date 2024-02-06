@@ -7,6 +7,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+        <link rel="icon" href="{{ url_for('static', filename='media/favicon.ico') }}">
     </head>
     <body>
         <div id="grayed-out-background">
@@ -31,7 +32,7 @@
             </div>
         </div>
         <div id="nav-bar">
-            <img src="{{ url_for('static', filename='fistbump_icon.png') }}" class="icon">
+            <img src="{{ url_for('static', filename='media/fistbump_icon.png') }}" class="icon">
             <div id="nav-option-container">
                 <a href="/blog" class="unset-a">
                     <p class="option-text">blog</p>
