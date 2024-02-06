@@ -32,8 +32,8 @@
                         </div>
                     </div>
                     <form id="modal-input-container" onsubmit="event.preventDefault(); return sendWaitlistEntry()">
-                        <input placeholder="Name" id="name" class="modal-input" autocomplete="off" spellcheck="false"></input>
-                        <input placeholder="Email" id="email" class="modal-input" autocomplete="off" spellcheck="false"></input>
+                        <input placeholder="Name" id="name" class="modal-input" autocomplete="off" spellcheck="false" required></input>
+                        <input placeholder="Email" id="email" class="modal-input" autocomplete="off" spellcheck="false" type="email" required></input>
                         <div id="modal-submit-container">
                             <input type="submit" value="Submit" class="modal-submit disabled"></input>
                         </div>
