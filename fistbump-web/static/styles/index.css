@@ -1,0 +1,86 @@
+@font-face {
+    font-family: 'Roobert-Regular';
+    src: url('/static/fonts/Roobert-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Roobert-Bold';
+    src: url('/static/fonts/Roobert-Bold.otf') format('truetype');
+}
+
+body {
+    background-color: #6FB4EB;
+    font-family: 'Roobert-Regular';
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10vh;
+}
+
+.logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.logo-text {
+    font-size: 95px;
+    color: #372F35;
+    cursor: default;
+}
+
+.caption-text {
+    margin-top: -82.5px;
+    font-size: 21px;
+    color: #372F35;
+}
+
+.center-hero {
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+}
+
+.button-container {
+    margin-top: 20px;
+    column-gap: 20px;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1.0);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.hero-button {
+    font-family: 'Roobert-Bold';
+    border: none;
+    font-size: 16px;
+    width: 100px;
+    height: 50px;
+    margin-right: 20px;
+    transition: all 0.35s ease-in-out;
+    color: #372F35;
+    animation: pulse 3s infinite;
+}
+
+.hero-button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+    animation-play-state: paused;
+    transform: scale(1.0);
+}
+
+.hero-waitlist {
+    background-color: #FFE450;
+}
+
+.hero-blog {
+    background-color: #F9724D;
+}
