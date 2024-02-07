@@ -14,7 +14,8 @@ class Database:
             CREATE TABLE IF NOT EXISTS waitlist (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 name VARCHAR(255) NOT NULL,
-                email VARCHAR(255) NOT NULL
+                email VARCHAR(255) NOT NULL,
+                is_added TINYINT(1) NOT NULL DEFAULT 0
             )
         ''')
         
