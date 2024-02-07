@@ -106,3 +106,14 @@ body {
         column-gap: 35px;
     }
 }
+
+@media only screen and (max-width: 375px){
+    .icon {
+        margin-left: -80px;
+    }
+
+    #nav-option-container {
+        margin-left: 10%;
+        column-gap: 35px;
+    }
+}
