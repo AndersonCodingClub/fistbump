@@ -84,3 +84,25 @@ body {
         column-gap: 35px;
     }
 }
+
+@media only screen and (max-width: 600px){
+    .icon {
+        margin-left: -50px;
+    }
+
+    #nav-option-container {
+        margin-left: 20%;
+        column-gap: 35px;
+    }
+}
+
+@media only screen and (max-width: 450px){
+    .icon {
+        margin-left: -75px;
+    }
+
+    #nav-option-container {
+        margin-left: 15%;
+        column-gap: 35px;
+    }
+}
