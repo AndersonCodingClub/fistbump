@@ -6,6 +6,7 @@
         <title>Fistbump | Blog</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/blog.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/nav.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/waitlist.css') }}">
         <link rel="icon" href="{{ url_for('static', filename='media/favicon.ico') }}">
@@ -48,13 +49,13 @@
                 <img src="{{ url_for('static', filename='media/fistbump_icon.png') }}" class="icon">
             </a>
             <div id="nav-option-container">
-                <a href="/blog" class="unset-a">
-                    <p class="option-text">blog</p>
+                <a href="/blog" class="blog-unset-a">
+                    <p class="blog-option-text active">blog</p>
                 </a>
-                <a href="/about" class="unset-a">
-                    <p class="option-text">about</p>
+                <a href="/about" class="blog-unset-a">
+                    <p class="blog-option-text">about</p>
                 </a>
-                <p class="option-text" onclick='openWaitlist()'>waitlist</p>
+                <p class="blog-option-text" onclick='openWaitlist()'>waitlist</p>
             </div>
         </div>
         <script src="{{ url_for('static', filename='js/waitlist.js') }}"></script>

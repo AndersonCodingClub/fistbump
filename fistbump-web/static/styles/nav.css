@@ -37,22 +37,52 @@ body {
     color: #372F35;
 }
 
-.unset-a {
+.unset-a, .blog-unset-a, .about-unset-a {
     all: unset;
+    cursor: pointer;
 }
 
 .unset-a:hover {
     color: #FFE450;
-    cursor: pointer;
 }
 
-.option-text {
+.blog-unset-a:hover {
+    color: #F9724D;
+}
+
+.about-unset-a:hover {
+    color: white;
+}
+
+.option-text, .blog-option-text, .about-option-text {
     font-family: 'Roobert-Bold';
     font-size: 18px;
 }
 
+.option-text.active {
+    color: #FFE450;
+}
+
+.about-option-text.active {
+    color: white;
+}
+
+.blog-option-text.active {
+    color: #F9724D;
+}
+
 .option-text:hover {
     color: #FFE450;
+    cursor: pointer;
+}
+
+.blog-option-text:hover {
+    color: #F9724D;
+    cursor: pointer;
+}
+
+.about-option-text:hover {
+    color: white;
     cursor: pointer;
 }
 
