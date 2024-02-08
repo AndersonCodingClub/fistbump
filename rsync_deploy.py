@@ -3,7 +3,7 @@ import subprocess
 from dotenv import load_dotenv
 
 
-load_dotenv('fistbump-web/config.env')
+load_dotenv(os.path.abspath(os.path.join(os.path.abspath(os.path.curdir), 'config.env')))
 
 def transfer_files(target_dir: str) -> None:
     """Automatically transfer current toodoo code to external server via rsync

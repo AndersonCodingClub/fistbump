@@ -84,3 +84,13 @@ body {
 .hero-blog {
     background-color: #F9724D;
 }
+
+@media only screen and (max-width: 450px){
+    .logo-text {
+        font-size: 75px;
+    }
+
+    .caption-text {
+        margin-top: -70px;
+    }
+}
