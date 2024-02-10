@@ -1,12 +1,14 @@
 import os
 from database import Database
 from dotenv import load_dotenv
+from flask_wtf.csrf import CSRFProtect
 from flask import Flask, render_template, jsonify, request
 
 
 load_dotenv('config.env')
 
 app = Flask(__name__)
+csrf = CSRFProtect(app)
 
 @app.route('/')
 def home():

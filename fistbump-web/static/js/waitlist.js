@@ -2,12 +2,14 @@ async function sendWaitlistEntry() {
     const waitlistName = document.getElementById('name').value;
     const waitlistEmail = document.getElementById('email').value;
     const data = { name: waitlistName, email: waitlistEmail };
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     try {
         const response = await fetch('/save-waitlist-entry', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRF-Token': csrfToken,
             },
             body: JSON.stringify(data)
         });
