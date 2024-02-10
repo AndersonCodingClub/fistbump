@@ -8,6 +8,7 @@ from flask import Flask, render_template, jsonify, request
 load_dotenv('config.env')
 
 app = Flask(__name__)
+app.secret_key = os.environ['SECRET_KEY']
 csrf = CSRFProtect(app)
 
 @app.route('/')
