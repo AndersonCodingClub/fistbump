@@ -1,8 +1,10 @@
 import os
+import redis
 import mysql.connector
+from typing import Union
 
 
-class Database:
+class Waitlist:
     def _setup_connection(self):
         self.conn = mysql.connector.connect(host='localhost', user='root', password=os.environ['password'])
         self.cursor = self.conn.cursor()
@@ -30,3 +32,13 @@ class Database:
         self.cursor.execute('INSERT INTO waitlist (name, email) VALUES (%s, %s)', (name, email))
         self.conn.commit()
         self._close_connection()
+        
+class Verification:
+    def __init__(self):
+        self.r = redis.Redis(host='localhost', port=6379, db=0)
+
+    def get_user(self, user_id: Union[int, str]):
+        return self.r.get(str(user_id))
+    
+    def add_user(self, user_id: Union[int, str], verification_code: str):
+        self.r.set(str(user_id), verification_code)

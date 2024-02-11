@@ -1,5 +1,5 @@
 import os
-from database import Database
+from database import Waitlist
 from dotenv import load_dotenv
 from flask_wtf.csrf import CSRFProtect
 from flask import Flask, render_template, jsonify, request
@@ -27,7 +27,7 @@ def about():
 def save_waitlist_entry():
     data = request.json
     name, email = data['name'], data['email']
-    Database().add_waitlist_user(name=name, email=email)
+    Waitlist().add_waitlist_user(name=name, email=email)
     
     return jsonify()
 
