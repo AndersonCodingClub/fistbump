@@ -13,6 +13,9 @@
     </head>
     <body>
         <div id="grayed-out-background">
+            <div id="loading-spinner" style="display: none;">
+                <img class="spinner" src="{{ url_for('static', filename='media/loading_spinner.gif') }}">
+            </div>
             <div id="waitlist-modal">
                 <div id="modal-content-container">
                     <div id="modal-text-container">
@@ -23,6 +26,25 @@
                             as soon as space opens up.
                         </p>
                     </div>
+                    <form id="modal-input-container" onsubmit="event.preventDefault(); return sendVerification()">
+                        <input placeholder="Name" id="name" class="modal-input" autocomplete="off" spellcheck="false" title="" required></input>
+                        <input placeholder="Email" id="email" class="modal-input" autocomplete="off" spellcheck="false" type="email" title="" required></input>
+                        <div id="modal-submit-container">
+                            <input type="submit" value="Next" class="modal-submit disabled"></input>
+                        </div>
+                        <div onclick='closeWaitlist()'>
+                            <p class='modal-cancel'>Cancel</p>
+                        </div>
+                    </form>
+                    <form id="modal-verification-container" onsubmit="event.preventDefault(); return createWaitlistEntry()" style="display: none">
+                        <input placeholder="Verification Code" id="code" class="modal-input" autocomplete="off" spellcheck="false" title="" required></input>
+                        <div id="modal-submit-container">
+                            <input type="submit" value="Submit" class="modal-submit disabled"></input>
+                        </div>
+                        <div onclick='closeWaitlist()'>
+                            <p class='modal-cancel'>Cancel</p>
+                        </div>
+                    </form>
                     <div id="confirmation-container" style="display: none;">
                         <div id="confirmation-text-container">
                             <svg viewBox="0 0 448 512" height="20" width="20" tabindex="-1">
@@ -31,16 +53,6 @@
                             <p>Your information has been saved! We'll shoot you an invite as soon as possible!</p>
                         </div>
                     </div>
-                    <form id="modal-input-container" onsubmit="event.preventDefault(); return sendWaitlistEntry()">
-                        <input placeholder="Name" id="name" class="modal-input" autocomplete="off" spellcheck="false" title="" required></input>
-                        <input placeholder="Email" id="email" class="modal-input" autocomplete="off" spellcheck="false" type="email" title="" required></input>
-                        <div id="modal-submit-container">
-                            <input type="submit" value="Submit" class="modal-submit disabled"></input>
-                        </div>
-                        <div onclick='closeWaitlist()'>
-                            <p class='modal-cancel'>Cancel</p>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>

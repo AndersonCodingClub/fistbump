@@ -3,6 +3,7 @@ import boto3
 import string
 import random as rd
 from dotenv import load_dotenv
+from database import Verification
 
 
 load_dotenv('config.env')
@@ -45,6 +46,20 @@ def send_verification_email(send_to_email: str, name: str, verification_code: st
     )
     
     return response
+
+def handle_verification(email: str, name: str):
+    verification_code = generate_random_code()
+    send_verification_email(email, name, verification_code)
+    Verification().add_user(email, verification_code)
+    
+def check_verification_code(email: str, entered_code: str) -> bool:
+    verification_code = Verification().get_user(email)
+    if not verification_code:
+        return False
+    return verification_code.decode().lower() == entered_code.lower().strip()
+
+def delete_verification_code(email: str):
+    return Verification().remove_user(email)
     
 if __name__ == '__main__':
     send_verification_email('zainmfj@gmail.com', 'Zain Javaid', generate_random_code())

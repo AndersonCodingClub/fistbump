@@ -3,6 +3,7 @@ from database import Waitlist
 from dotenv import load_dotenv
 from flask_wtf.csrf import CSRFProtect
 from flask import Flask, render_template, jsonify, request
+from email_verification import handle_verification, check_verification_code, delete_verification_code
 
 
 load_dotenv('config.env')
@@ -23,13 +24,27 @@ def blog():
 def about():
     return render_template('about.html')
 
-@app.route('/save-waitlist-entry', methods=['POST'])
-def save_waitlist_entry():
+@app.route('/send-verification', methods=['POST'])
+def send_verification():
     data = request.json
     name, email = data['name'], data['email']
-    Waitlist().add_waitlist_user(name=name, email=email)
+    if Waitlist().is_waitlist_user(email):
+        return jsonify({'FAIL': 'DUPLICATE'}), 400
     
+    handle_verification(email, name)
     return jsonify()
+    
+@app.route('/check-code', methods=['POST'])
+def check_code():
+    data = request.json
+    name, email, code = data['name'], data['email'], data['verificationCode'].strip()
+    is_correct_verification_code = check_verification_code(email, code)
+    
+    if is_correct_verification_code:
+        Waitlist().add_waitlist_user(name, email)
+        delete_verification_code(email)
+        
+    return jsonify({'isValid': is_correct_verification_code})
 
 if __name__ == '__main__':
     app.run(os.environ['HOST'], int(os.environ['PORT']), debug=True)

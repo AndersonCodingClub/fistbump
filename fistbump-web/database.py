@@ -1,7 +1,6 @@
 import os
 import redis
 import mysql.connector
-from typing import Union
 
 
 class Waitlist:
@@ -27,18 +26,34 @@ class Waitlist:
         self.cursor.close()
         self.conn.close()
         
-    def add_waitlist_user(self, name: str, email: str):
+    def is_waitlist_user(self, email: str) -> bool:
         self._setup_connection()
+        
+        self.cursor.execute('SELECT id FROM waitlist WHERE email=%s', (email,))
+        row = self.cursor.fetchone()
+        
+        self._close_connection()
+        return row is not None
+        
+    def add_waitlist_user(self, name: str, email: str) -> int:
+        self._setup_connection()
+        
         self.cursor.execute('INSERT INTO waitlist (name, email) VALUES (%s, %s)', (name, email))
         self.conn.commit()
+        waitlist_id = self.cursor.lastrowid
+        
         self._close_connection()
+        return waitlist_id
         
 class Verification:
     def __init__(self):
         self.r = redis.Redis(host='localhost', port=6379, db=0)
 
-    def get_user(self, user_id: Union[int, str]):
-        return self.r.get(str(user_id))
+    def get_user(self, email: str):
+        return self.r.get(email)
     
-    def add_user(self, user_id: Union[int, str], verification_code: str):
-        self.r.set(str(user_id), verification_code)
+    def add_user(self, email: str, verification_code: str):
+        self.r.set(email, verification_code)
+        
+    def remove_user(self, email: str):
+        self.r.delete(email)
